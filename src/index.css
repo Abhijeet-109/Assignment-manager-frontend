@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy: #1E2A5E;
+  --color-navy-dark: #2D3A7C;
+  --color-bg-light: #F3F4F6;
+  --color-card-light: #FFFFFF;
+  --color-bg-dark: #0F172A;
+  --color-card-dark: #1E293B;
+  --color-accent-violet: #6D28D9;
+  --color-text-muted: #6B7280;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #F3F4F6;
+  color: #111827;
+}
+
+#root {
+  min-height: 100vh;
+}
