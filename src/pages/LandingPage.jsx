@@ -121,13 +121,13 @@ const LandingPage = () => {
                 .reveal-visible { opacity: 1; transform: translateY(0); }
                 .reveal-stagger > *:nth-child(1) { transition-delay: 0s; }
                 .reveal-stagger > *:nth-child(2) { transition-delay: 0.12s; }
-                .reveal-stagger > *:nth-child(3) { transition-delay: 0.24s; }
-                .reveal-stagger > *:nth-child(4) { transition-delay: 0.36s; }
-                .reveal-stagger > *:nth-child(5) { transition-delay: 0.48s; }
-                .reveal-stagger > *:nth-child(6) { transition-delay: 0.6s; }
+                .reveal-stagger > *:nth-child(3) { transition-delay: 0.14s; }
+                .reveal-stagger > *:nth-child(4) { transition-delay: 0.16s; }
+                .reveal-stagger > *:nth-child(5) { transition-delay: 0.18s; }
+                .reveal-stagger > *:nth-child(6) { transition-delay: 0.16s; }
                 .card-hover { transition: transform 0.25s ease, box-shadow 0.25s ease; }
                 .card-hover:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
-                .navbar-solid { background: rgba(15,23,42,0.95); backdrop-filter: blur(12px); border-bottom: none; box-shadow: 0 1px 0 rgba(255,255,255,0.06); }
+                .navbar-solid { background: rgba(15,23,42,0.95); backdrop-filter: blur(12px); box-shadow: 0 1px 0 rgba(255,255,255,0.06); }
                 .navbar-clear { background: transparent; backdrop-filter: none; }
             `}</style>
 
