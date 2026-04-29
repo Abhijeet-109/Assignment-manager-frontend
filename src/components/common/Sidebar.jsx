@@ -38,10 +38,10 @@ const Sidebar = () => {
     };
 
     return (
-        <aside className="w-64 min-h-screen bg-[#1E2A5E] text-white flex flex-col">
+        <aside className="w-64 h-screen sticky top-0 bg-[#1E2A5E] text-white flex flex-col overflow-hidden flex-shrink-0">
 
             {/* ── Profile Block ── */}
-            <div className="p-5 border-b border-blue-800">
+            <div className="p-5 border-b border-blue-800 flex-shrink-0">
                 <div className="flex items-center gap-3">
                     <div className="w-10 h-10 rounded-full bg-violet-500 flex items-center justify-center text-sm font-bold flex-shrink-0">
                         {initial}
@@ -53,7 +53,7 @@ const Sidebar = () => {
                 </div>
             </div>
 
-            {/* ── Nav Links ── */}
+            {/* ── Nav Links ── (no overflow-y, all links always visible) */}
             <nav className="flex-1 p-3 space-y-1">
                 {links.map(({ label, to, d }) => (
                     <NavLink
@@ -89,7 +89,7 @@ const Sidebar = () => {
             </nav>
 
             {/* ── Logout at Bottom ── */}
-            <div className="p-3 border-t border-blue-800">
+            <div className="p-3 border-t border-blue-800 flex-shrink-0">
                 <button
                     onClick={handleLogout}
                     className="w-full flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm text-blue-200 hover:bg-red-600 hover:text-white transition-colors"

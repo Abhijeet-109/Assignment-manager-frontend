@@ -3,23 +3,52 @@
 @theme {
   --color-navy: #1E2A5E;
   --color-navy-dark: #2D3A7C;
-  --color-bg-light: #F3F4F6;
-  --color-card-light: #FFFFFF;
-  --color-bg-dark: #0F172A;
-  --color-card-dark: #1E293B;
   --color-accent-violet: #6D28D9;
-  --color-text-muted: #6B7280;
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
 }
 
+/* ── Light Theme (default) ── */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --bg-page:      #F3F4F6;
+  --bg-card:      #FFFFFF;
+  --bg-sidebar:   #1E2A5E;
+  --bg-navbar:    #FFFFFF;
+  --text-primary: #111827;
+  --text-muted:   #6B7280;
+  --text-heading: #1E2A5E;
+  --border:       #E5E7EB;
+  --hover-row:    #F9FAFB;
+}
+
+/* ── Dark Theme ── */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-page:      #0F172A;
+  --bg-card:      #1E293B;
+  --bg-sidebar:   #0F172A;
+  --bg-navbar:    #1E293B;
+  --text-primary: #F1F5F9;
+  --text-muted:   #94A3B8;
+  --text-heading: #93C5FD;
+  --border:       #334155;
+  --hover-row:    #1E293B;
+}
+
+html {
+  color-scheme: light;
+}
+
 body {
   margin: 0;
   font-family: 'Inter', system-ui, sans-serif;
-  background-color: #F3F4F6;
-  color: #111827;
+  background-color: var(--bg-page);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 #root {
