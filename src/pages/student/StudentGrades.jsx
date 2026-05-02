@@ -1,0 +1,147 @@
+import { useState, useEffect } from 'react';
+import api from '../../services/api';
+import Loading from '../../components/common/Loading';
+
+const gradeLabel = pct => {
+    if (pct >= 90) return { label: 'A', textColor: '#10B981', bg: '#D1FAE5' };
+    if (pct >= 75) return { label: 'B', textColor: '#3B82F6', bg: '#DBEAFE' };
+    if (pct >= 60) return { label: 'C', textColor: '#F59E0B', bg: '#FEF3C7' };
+    return { label: 'F', textColor: '#EF4444', bg: '#FEE2E2' };
+};
+
+const StudentGrades = () => {
+    const [submissions, setSubmissions] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        api.get('/submissions/my')
+            .then(res => setSubmissions(res.data.data || []))
+            .catch(console.error)
+            .finally(() => setLoading(false));
+    }, []);
+
+    const graded = submissions.filter(s => s.status === 'graded' && s.obtainedMarks != null);
+    const avg = graded.length
+        ? Math.round(graded.reduce((acc, s) => acc + (s.obtainedMarks / s.totalMarks) * 100, 0) / graded.length)
+        : 0;
+
+    if (loading) return <Loading />;
+
+    return (
+        <div className="space-y-5">
+
+            {/* Header */}
+            <div className="rounded-xl shadow-sm p-5 border-l-4 border-[#1E2A5E]" style={{ backgroundColor: 'var(--bg-card)' }}>
+                <h1 className="text-xl font-bold text-[#1E2A5E]">📊 My Grades</h1>
+                <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>Your graded submission results</p>
+            </div>
+
+            {/* Average Banner */}
+            <div className="rounded-xl shadow-sm overflow-hidden" style={{ backgroundColor: 'var(--bg-card)' }}>
+                <div className="bg-[#1E2A5E] px-5 py-3">
+                    <h2 className="text-white font-semibold text-sm">📈 Overall Performance</h2>
+                </div>
+                <div className="p-5 flex items-center gap-6">
+                    <div className="text-5xl font-bold" style={{
+                        background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
+                        WebkitBackgroundClip: 'text',
+                        WebkitTextFillColor: 'transparent'
+                    }}>
+                        {avg}%
+                    </div>
+                    <div className="flex-1">
+                        <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>Average Score</p>
+                        <p className="text-sm mt-0.5" style={{ color: 'var(--text-muted)' }}>
+                            Across {graded.length} graded submission{graded.length !== 1 ? 's' : ''}
+                        </p>
+                        <div className="mt-2 h-2.5 bg-gray-200 rounded-full overflow-hidden max-w-xs">
+                            <div
+                                className="h-full rounded-full transition-all duration-700"
+                                style={{ width: `${avg}%`, background: 'linear-gradient(90deg,#6366f1,#8b5cf6)' }}
+                            />
+                        </div>
+                    </div>
+                    {/* Mini stat boxes */}
+                    <div className="grid grid-cols-2 gap-2 flex-shrink-0">
+                        <div className="bg-blue-50 rounded-lg p-3 text-center">
+                            <p className="text-xl font-bold text-blue-600">{graded.length}</p>
+                            <p className="text-xs text-gray-500">Graded</p>
+                        </div>
+                        <div className="bg-amber-50 rounded-lg p-3 text-center">
+                            <p className="text-xl font-bold text-amber-600">{submissions.length - graded.length}</p>
+                            <p className="text-xs text-gray-500">Pending</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* Grade List */}
+            <div className="rounded-xl shadow-sm overflow-hidden" style={{ backgroundColor: 'var(--bg-card)' }}>
+                <div className="bg-[#1E2A5E] px-5 py-3">
+                    <h2 className="text-white font-semibold text-sm">📝 Submission Results</h2>
+                </div>
+                {graded.length === 0 ? (
+                    <div className="text-center py-16" style={{ color: 'var(--text-muted)' }}>
+                        <p className="font-medium">No graded submissions yet</p>
+                        <p className="text-sm mt-1">Your teacher hasn't graded any submissions</p>
+                    </div>
+                ) : (
+                    <table className="w-full text-sm">
+                        <thead>
+                            <tr className="text-left border-b" style={{ color: 'var(--text-muted)', borderColor: 'var(--border)' }}>
+                                <th className="px-5 py-2">Grade</th>
+                                <th className="px-5 py-2">Assignment</th>
+                                <th className="px-5 py-2">Subject</th>
+                                <th className="px-5 py-2 text-right">Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {graded.map(s => {
+                                const pct = Math.round((s.obtainedMarks / s.totalMarks) * 100);
+                                const { label, textColor, bg } = gradeLabel(pct);
+                                return (
+                                    <tr
+                                        key={s._id}
+                                        className="border-b transition-colors"
+                                        style={{ borderColor: 'var(--border)' }}
+                                        onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
+                                        onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
+                                    >
+                                        <td className="px-5 py-3">
+                                            <span
+                                                className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold"
+                                                style={{ backgroundColor: bg, color: textColor }}
+                                            >
+                                                {label}
+                                            </span>
+                                        </td>
+                                        <td className="px-5 py-3">
+                                            <p className="font-medium" style={{ color: 'var(--text-primary)' }}>
+                                                {s.assignmentId?.title || 'Assignment'}
+                                            </p>
+                                            {s.feedback && (
+                                                <p className="text-xs mt-0.5 italic" style={{ color: 'var(--text-muted)' }}>"{s.feedback}"</p>
+                                            )}
+                                        </td>
+                                        <td className="px-5 py-3" style={{ color: 'var(--text-muted)' }}>
+                                            {s.assignmentId?.subjectId?.name || '—'}
+                                        </td>
+                                        <td className="px-5 py-3 text-right">
+                                            <p className="font-bold" style={{ color: 'var(--text-primary)' }}>
+                                                {s.obtainedMarks}
+                                                <span className="font-normal text-xs ml-1" style={{ color: 'var(--text-muted)' }}>/ {s.totalMarks}</span>
+                                            </p>
+                                            <p className="text-xs font-semibold mt-0.5" style={{ color: textColor }}>{pct}%</p>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                        </tbody>
+                    </table>
+                )}
+            </div>
+        </div>
+    );
+};
+
+export default StudentGrades;
