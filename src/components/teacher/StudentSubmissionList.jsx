@@ -46,8 +46,18 @@ const StudentSubmissionList = ({ submissions, onGrade }) => {
                                 {formatDate(s.submittedAt)}
                             </td>
                             <td className="px-4 py-3">
-                                {s.fileUrl
-                                    ? <a href={s.fileUrl} target="_blank" rel="noreferrer" className="text-blue-500 hover:underline">View File</a>
+                                {s.file?.fileUrl
+                                    ?
+                                    <a href={s.file.fileUrl.startsWith('/uploads/')
+                                        ? `${(import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')}${s.file.fileUrl}`
+                                        : s.file.fileUrl
+                                    }
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className="text-blue-500 hover:underline"
+                                    >
+                                        View File
+                                    </a>
                                     : <span style={{ color: 'var(--text-muted)' }}>No file</span>
                                 }
                             </td>

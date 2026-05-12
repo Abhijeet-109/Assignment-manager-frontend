@@ -41,10 +41,14 @@ const CreateAssignmentForm = ({ onSubmit, onCancel, initial = null }) => {
     }, []);
 
     const handle = (e) => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+    const [fileObj, setFileObj] = useState(null);   // <------------------Real file handling -----------------
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
-        if (file) setForm(f => ({ ...f, fileUrl: file.name }));
+        if (file) {
+            setFileObj(file);               
+            setForm(f => ({ ...f, fileUrl: file.name })); 
+        }
     };
 
     const submit = async () => {
@@ -59,7 +63,7 @@ const CreateAssignmentForm = ({ onSubmit, onCancel, initial = null }) => {
         try {
             setLoading(true);
             setError('');
-            await onSubmit(form);
+            await onSubmit(form, fileObj);
         } catch (err) {
             setError(err.response?.data?.message || 'Failed to save assignment.');
         } finally {

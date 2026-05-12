@@ -125,15 +125,14 @@ const TeacherAssignments = () => {
     const openEdit = (a) => { setEditTarget(a); setModalOpen(true); };
     const closeModal = () => { setModalOpen(false); setEditTarget(null); };
 
-    const onFormSubmit = async (form) => {
-        const isEdit = !!editTarget;
-        if (isEdit) await updateAssignment(editTarget._id, form);
-        else await createAssignment(form);
-        closeModal();
-        fetchAssignments();
-        showToast(isEdit ? '✏️ Assignment updated successfully!' : '✅ Assignment created successfully!');
-    };
-
+   const onFormSubmit = async (form, fileObj = null) => {
+    const isEdit = !!editTarget;
+    if (isEdit) await updateAssignment(editTarget._id, form);
+    else await createAssignment(form, fileObj);
+    closeModal();
+    fetchAssignments();
+    showToast(isEdit ? '✏️ Assignment updated successfully!' : '✅ Assignment created successfully!');
+};
     const handleDeleteClick = (id) => setDeleteId(id);
 
     const confirmDelete = async () => {
