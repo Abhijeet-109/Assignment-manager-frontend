@@ -3,6 +3,7 @@ import Sidebar from '../components/common/Sidebar';
 import Navbar from '../components/common/Navbar';
 import AdminHome from './admin/AdminHome';
 import UserManagement from './admin/UserManagement';
+import SubjectManagement from './admin/SubjectManagement';
 
 const AdminDashboard = () => {
     return (
@@ -14,6 +15,7 @@ const AdminDashboard = () => {
                     <Routes>
                         <Route index element={<AdminHome />} />
                         <Route path="users" element={<UserManagement />} />
+                        <Route path="subjects" element={<SubjectManagement />} />
                         <Route path="*" element={<Navigate to="/admin" replace />} />
                     </Routes>
                 </main>

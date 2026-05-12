@@ -168,14 +168,14 @@ const UserManagement = () => {
                                     </span>
                                 </td>
                                 <td className="px-4 py-3 text-center">
-                                    {u.isActive ? (
-                                        <button onClick={() => handleToggle(u._id)} className="px-3 py-1 text-xs rounded-lg bg-yellow-500 text-white hover:bg-yellow-600 transition-colors">Deactivate</button>
+                                    {u.isActive == false ? (
+                                        <button onClick={() => handleToggle(u._id)} className="px-3 py-1 text-xs rounded-lg bg-yellow-500 text-white hover:bg-yellow-600 transition-colors">Deactivated</button>
                                     ) : (
-                                        <button onClick={() => handleToggle(u._id)} className="px-3 py-1 text-xs rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors">Activate</button>
+                                        <button onClick={() => handleToggle(u._id)} className="px-3 py-1 text-xs rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors">Active</button>
                                     )}
                                 </td>
                                 <td className="px-4 py-3 text-center">
-                                    {u._id === currentUser?._id ? (
+                                    {u._id === currentUser?._id || u.isSuperAdmin ? (
                                         <span className="text-xs text-gray-400 italic">—</span>
                                     ) : (
                                         <button
@@ -202,15 +202,17 @@ const UserManagement = () => {
                         </div>
                         <p className="text-sm mb-4" style={{ color: 'var(--text-muted)' }}>Select the type of account to create:</p>
                         <div className="flex flex-col gap-3">
-                            <button onClick={() => openModal('admin')}
-                                className="flex items-center gap-3 border rounded-lg px-4 py-3 text-left hover:bg-purple-50 transition-colors"
-                                style={{ borderColor: 'var(--border)' }}>
-                                <span className="text-2xl">🛡️</span>
-                                <div>
-                                    <div className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>Admin Account</div>
-                                    <div className="text-xs" style={{ color: 'var(--text-muted)' }}>Full system access</div>
-                                </div>
-                            </button>
+                            {currentUser?.isSuperAdmin && (
+                                <button onClick={() => openModal('admin')}
+                                    className="flex items-center gap-3 border rounded-lg px-4 py-3 text-left hover:bg-purple-50 transition-colors"
+                                    style={{ borderColor: 'var(--border)' }}>
+                                    <span className="text-2xl">🛡️</span>
+                                    <div>
+                                        <div className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>Admin Account</div>
+                                        <div className="text-xs" style={{ color: 'var(--text-muted)' }}>Full system access</div>
+                                    </div>
+                                </button>
+                            )}
                             <button onClick={() => openModal('teacher')}
                                 className="flex items-center gap-3 border rounded-lg px-4 py-3 text-left hover:bg-blue-50 transition-colors"
                                 style={{ borderColor: 'var(--border)' }}>
