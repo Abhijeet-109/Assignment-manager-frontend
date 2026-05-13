@@ -8,46 +8,24 @@ import { useTheme } from '../../context/ThemeContext';
 ───────────────────────────────────────────── */
 const DarkAuroraLayer = () => (
     <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-xl">
-        {/* Large violet orb — top-left */}
+        {/* Primary sweep — off-center radial, spins clockwise */}
         <div style={{
             position: 'absolute',
-            width: 320, height: 320,
-            borderRadius: '50%',
-            top: '-80px', left: '-80px',
-            background: 'radial-gradient(circle, rgba(139,92,246,0.55) 0%, transparent 70%)',
-            animation: 'orb-float-1 4s ease-in-out infinite',
-            filter: 'blur(45px)',
+            top: '-50%', right: '-50%',
+            width: '200%', height: '200%',
+            background: 'radial-gradient(circle at 60% 40%, rgba(139,92,246,0.25) 0%, rgba(240,147,251,0.1) 20%, transparent 50%)',
+            animation: 'banner-spin 21s linear infinite',
+            transformOrigin: 'center center',
         }} />
-        {/* Pink / fuchsia orb — top-right */}
-        <div style={{
+        {/* Secondary sweep — different offset, counter-clockwise, slower */}
+        {/* <div style={{
             position: 'absolute',
-            width: 240, height: 240,
-            borderRadius: '50%',
-            top: '-20px', right: '120px',
-            background: 'radial-gradient(circle, rgba(240,147,251,0.45) 0%, transparent 70%)',
-            animation: 'orb-float-2 5s ease-in-out infinite',
-            filter: 'blur(38px)',
-        }} />
-        {/* Indigo orb — bottom-centre */}
-        <div style={{
-            position: 'absolute',
-            width: 200, height: 200,
-            borderRadius: '50%',
-            bottom: '-50px', left: '38%',
-            background: 'radial-gradient(circle, rgba(99,102,241,0.5) 0%, transparent 70%)',
-            animation: 'orb-float-3 6s ease-in-out infinite',
-            filter: 'blur(35px)',
-        }} />
-        {/* Small accent — bottom-right */}
-        <div style={{
-            position: 'absolute',
-            width: 140, height: 140,
-            borderRadius: '50%',
-            bottom: '-20px', right: '30px',
-            background: 'radial-gradient(circle, rgba(167,139,250,0.4) 0%, transparent 70%)',
-            animation: 'orb-float-2 4s ease-in-out infinite reverse',
-            filter: 'blur(28px)',
-        }} />
+            top: '-50%', left: '-50%',
+            width: '200%', height: '200%',
+            background: 'radial-gradient(circle at 30% 60%, rgba(99,102,241,0.20) 0%, transparent 55%)',
+            animation: 'banner-spin 20s linear infinite reverse',
+            transformOrigin: 'center center',
+        }} /> */}
     </div>
 );
 
@@ -56,36 +34,24 @@ const DarkAuroraLayer = () => (
 ───────────────────────────────────────────── */
 const LightAuroraLayer = () => (
     <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-xl">
-        {/* White shimmer — top-left */}
+        {/* Primary sweep — white/cyan radial, spins clockwise */}
         <div style={{
             position: 'absolute',
-            width: 280, height: 280,
-            borderRadius: '50%',
-            top: '-60px', left: '-60px',
-            background: 'radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%)',
-            animation: 'blob-drift-1 4s ease-in-out infinite',
-            filter: 'blur(32px)',
+            top: '-50%', right: '-50%',
+            width: '200%', height: '200%',
+            background: 'radial-gradient(circle at 60% 40%, rgba(255,255,255,0.25) 0%, rgba(186,230,253,0.20) 30%, transparent 65%)',
+            animation: 'banner-spin 19s linear infinite',
+            transformOrigin: 'center center',
         }} />
-        {/* Cyan blob — bottom-right */}
-        <div style={{
+        {/* Secondary sweep — counter-clockwise, slower */}
+        {/* <div style={{
             position: 'absolute',
-            width: 220, height: 220,
-            borderRadius: '50%',
-            bottom: '-40px', right: '80px',
-            background: 'radial-gradient(circle, rgba(186,230,253,0.55) 0%, transparent 70%)',
-            animation: 'blob-drift-2 5s ease-in-out infinite',
-            filter: 'blur(28px)',
-        }} />
-        {/* Teal accent — top-right */}
-        <div style={{
-            position: 'absolute',
-            width: 160, height: 160,
-            borderRadius: '50%',
-            top: '-10px', right: '20px',
-            background: 'radial-gradient(circle, rgba(103,232,249,0.35) 0%, transparent 70%)',
-            animation: 'blob-drift-1 6s ease-in-out infinite reverse',
-            filter: 'blur(22px)',
-        }} />
+            top: '-50%', left: '-50%',
+            width: '200%', height: '200%',
+            background: 'radial-gradient(circle at 30% 60%, rgba(224,242,254,0.30) 0%, transparent 55%)',
+            animation: 'banner-spin 19s linear infinite reverse',
+            transformOrigin: 'center center',
+        }} /> */}
     </div>
 );
 
@@ -138,7 +104,7 @@ const StudentHome = () => {
     /* ── Banner background per theme ── */
     const bannerBg = isDark
         ? 'linear-gradient(135deg, #1a0533 0%, #2d0a6e 50%, #1a0533 100%)'
-        : 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #0284c7 100%)';
+        : 'linear-gradient(135deg, #0369a1 0%, #0891b2 50%, #0e7490 100%)';
 
     return (
         <div className="space-y-6">
