@@ -5,6 +5,8 @@ import Navbar  from '../components/common/Navbar';
 import TeacherHome        from './teacher/TeacherHome';
 import TeacherAssignments from './teacher/TeacherAssignments';
 import TeacherSubmissions from './teacher/TeacherSubmissions';
+import ProfilePage from './ProfilePage';
+
 
 const TeacherDashboard = () => (
     <div className="flex h-screen overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
@@ -16,6 +18,7 @@ const TeacherDashboard = () => (
                     <Route index          element={<TeacherHome />} />
                     <Route path="assignments" element={<TeacherAssignments />} />
                     <Route path="submissions" element={<TeacherSubmissions />} />
+                    <Route path="profile" element={<ProfilePage />} />
                     <Route path="*"        element={<Navigate to="/teacher" replace />} />
                 </Routes>
             </main>

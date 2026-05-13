@@ -4,6 +4,10 @@ import Navbar from '../components/common/Navbar';
 import StudentHome from './student/StudentHome';
 import StudentAssignments from './student/StudentAssignments';
 import StudentGrades from './student/StudentGrades';
+import ProfilePage from './ProfilePage';
+import StudentSelfUploads from './student/StudentSelfUploads';
+
+
 
 const StudentDashboard = () => {
     return (
@@ -16,6 +20,8 @@ const StudentDashboard = () => {
                         <Route index element={<StudentHome />} />
                         <Route path="assignments" element={<StudentAssignments />} />
                         <Route path="grades" element={<StudentGrades />} />
+                        <Route path="self-uploads" element={<StudentSelfUploads />} />
+                        <Route path="profile" element={<ProfilePage />} />
                         <Route path="*" element={<Navigate to="/student" replace />} />
                     </Routes>
                 </main>

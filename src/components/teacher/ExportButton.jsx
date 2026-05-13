@@ -21,7 +21,12 @@ const ExportButton = ({ assignmentId, assignmentTitle }) => {
         <button
             onClick={handle}
             loading={loading}
-            className="px-4 py-2 border-2 border-black text-black font-medium rounded-lg hover:bg-black hover:text-white transition-all">
+            className="px-4 py-2 border-2 font-medium rounded-lg transition-all"
+            style={{
+                borderColor: 'var(--export-btn-bg)',
+                backgroundColor: 'var(--export-btn-bg)',
+                color: 'var(--export-btn-text)',
+            }}>
             ⬇ Export CSV
         </button>
     );

@@ -204,8 +204,9 @@ const UserManagement = () => {
                         <div className="flex flex-col gap-3">
                             {currentUser?.isSuperAdmin && (
                                 <button onClick={() => openModal('admin')}
-                                    className="flex items-center gap-3 border rounded-lg px-4 py-3 text-left hover:bg-purple-50 transition-colors"
-                                    style={{ borderColor: 'var(--border)' }}>
+                                    className="flex items-center gap-3 border rounded-lg px-4 py-3 text-left transition-colors"
+                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
+                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'} style={{ borderColor: 'var(--border)' }}>
                                     <span className="text-2xl">🛡️</span>
                                     <div>
                                         <div className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>Admin Account</div>
@@ -214,8 +215,9 @@ const UserManagement = () => {
                                 </button>
                             )}
                             <button onClick={() => openModal('teacher')}
-                                className="flex items-center gap-3 border rounded-lg px-4 py-3 text-left hover:bg-blue-50 transition-colors"
-                                style={{ borderColor: 'var(--border)' }}>
+                                className="flex items-center gap-3 border rounded-lg px-4 py-3 text-left transition-colors"
+                                onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
+                                onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'} style={{ borderColor: 'var(--border)' }}>
                                 <span className="text-2xl">👨‍🏫</span>
                                 <div>
                                     <div className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>Teacher Account</div>
@@ -223,8 +225,9 @@ const UserManagement = () => {
                                 </div>
                             </button>
                             <button onClick={() => openModal('student')}
-                                className="flex items-center gap-3 border rounded-lg px-4 py-3 text-left hover:bg-green-50 transition-colors"
-                                style={{ borderColor: 'var(--border)' }}>
+                                className="flex items-center gap-3 border rounded-lg px-4 py-3 text-left transition-colors"
+                                onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
+                                onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'} style={{ borderColor: 'var(--border)' }}>
                                 <span className="text-2xl">🎓</span>
                                 <div>
                                     <div className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>Student Account</div>

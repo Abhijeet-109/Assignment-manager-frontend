@@ -46,7 +46,7 @@ const TeacherHome = () => {
 
     const filterBtn = 'px-3 py-1.5 rounded-lg text-sm font-medium border transition-colors';
     const activeBtn = 'bg-[#1E2A5E] text-white border-[#1E2A5E]';
-    const inactiveBtn = 'border-gray-300 text-gray-600 hover:border-[#1E2A5E]';
+    const inactiveBtn = 'border-[var(--filter-btn-border)] text-[var(--filter-btn-color)] hover:border-[#1E2A5E]';
 
     const divisionLabel = divFilter ? `Div ${divFilter}` : 'All Divisions';
 
@@ -55,7 +55,7 @@ const TeacherHome = () => {
             {/* Title */}
             <div className="rounded-xl shadow-sm p-5 border-l-4 border-[#1E2A5E]"
                 style={{ backgroundColor: 'var(--bg-card)' }}>
-                <h1 className="text-xl font-bold text-[#1E2A5E]">👨‍🏫 Teacher Dashboard</h1>
+                <h1 className="text-xl font-bold" style={{ color: 'var(--text-heading)' }}>👨‍🏫 Teacher Dashboard</h1>
                 <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>
                     Here's a summary of your assignments and student progress.
                 </p>
@@ -72,6 +72,7 @@ const TeacherHome = () => {
                         className={`${filterBtn} ${divFilter === d.value ? activeBtn : inactiveBtn}`}>
                         {d.label}
                     </button>
+
                 ))}
                 {divFilter && (
                     <span className="ml-auto text-xs font-medium px-2 py-1 rounded-full bg-blue-100 text-blue-700">
@@ -168,7 +169,7 @@ const TeacherHome = () => {
                                             <span>Graded</span>
                                             <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{graded} / {total}</span>
                                         </div>
-                                        <div className="w-full bg-gray-200 rounded-full h-3">
+                                        <div className="w-full rounded-full h-3" style={{ backgroundColor: 'var(--border)' }}>
                                             <div className="bg-green-500 h-3 rounded-full transition-all duration-500"
                                                 style={{ width: `${gradedPct}%` }} />
                                         </div>
@@ -179,24 +180,24 @@ const TeacherHome = () => {
                                             <span>Pending Review</span>
                                             <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{pending} / {total}</span>
                                         </div>
-                                        <div className="w-full bg-gray-200 rounded-full h-3">
+                                        <div className="w-full rounded-full h-3" style={{ backgroundColor: 'var(--border)' }}>
                                             <div className="bg-yellow-400 h-3 rounded-full transition-all duration-500"
                                                 style={{ width: `${pendingPct}%` }} />
                                         </div>
                                         <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{pendingPct}% awaiting review</p>
                                     </div>
                                     <div className="pt-4 border-t grid grid-cols-3 text-center gap-2" style={{ borderColor: 'var(--border)' }}>
-                                        <div className="bg-blue-50 rounded-lg p-3">
-                                            <p className="text-xl font-bold text-blue-600">{total}</p>
-                                            <p className="text-xs text-gray-500">Total</p>
+                                        <div className="rounded-lg p-3" style={{ backgroundColor: 'var(--stat-blue-bg)' }}>
+                                            <p className="text-xl font-bold" style={{ color: 'var(--stat-blue-text)' }}>{total}</p>
+                                            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Total</p>
                                         </div>
-                                        <div className="bg-green-50 rounded-lg p-3">
-                                            <p className="text-xl font-bold text-green-600">{graded}</p>
-                                            <p className="text-xs text-gray-500">Graded</p>
+                                        <div className="rounded-lg p-3" style={{ backgroundColor: 'var(--stat-blue-bg)' }}>
+                                            <p className="text-xl font-bold" style={{ color: 'var(--stat-green-text)' }}>{graded}</p>
+                                            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Graded</p>
                                         </div>
-                                        <div className="bg-yellow-50 rounded-lg p-3">
-                                            <p className="text-xl font-bold text-yellow-600">{pending}</p>
-                                            <p className="text-xs text-gray-500">Pending</p>
+                                        <div className="rounded-lg p-3" style={{ backgroundColor: 'var(--stat-blue-bg)' }}>
+                                            <p className="text-xl font-bold" style={{ color: 'var(--stat-amber-text)' }}>{pending}</p>
+                                            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Pending</p>
                                         </div>
                                     </div>
                                 </div>

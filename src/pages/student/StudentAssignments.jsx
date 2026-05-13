@@ -395,7 +395,7 @@ const StudentAssignments = () => {
             {/* Header */}
             <div className="rounded-xl shadow-sm p-5 border-l-4 border-[#1E2A5E]"
                 style={{ backgroundColor: 'var(--bg-card)' }}>
-                <h1 className="text-xl font-bold text-[#1E2A5E]">📋 All Assignments</h1>
+                <h1 className="text-xl font-bold" style={{ color: 'var(--text-heading)' }}>📋 All Assignments</h1>
                 <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>
                     View assignment details and submit your work
                 </p>
@@ -424,7 +424,8 @@ const StudentAssignments = () => {
                         className={`px-4 py-2 rounded-lg text-xs font-semibold border transition-all capitalize
                             ${filter === f
                                 ? 'bg-[#1E2A5E] text-white border-transparent'
-                                : 'border-gray-300 text-gray-600 hover:border-[#1E2A5E] hover:text-[#1E2A5E]'
+                                : 'hover:border-[#858ca8] hover:text-[#b7b8bf]'
+
                             }`}>
                         {f}
                     </button>

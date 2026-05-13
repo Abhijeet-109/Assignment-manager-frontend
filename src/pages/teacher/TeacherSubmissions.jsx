@@ -31,7 +31,7 @@ const DivisionGroupedSubmissions = ({ submissions, onGrade }) => {
                     style={{ borderColor: 'var(--border)' }}>
                     <div className="px-4 py-2 flex items-center gap-2"
                         style={{ backgroundColor: 'var(--bg-page)' }}>
-                        <span className="text-xs font-bold uppercase tracking-wide text-[#1E2A5E]">
+                        <span className="text-xs font-bold uppercase tracking-wide" style={{ color: 'var(--division-label)' }}>
                             Division {div}
                         </span>
                         <span className="text-xs px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 font-medium">
@@ -83,7 +83,7 @@ const TeacherSubmissions = () => {
         <div className="space-y-4">
             <div className="rounded-xl shadow-sm p-5 border-l-4 border-[#1E2A5E]"
                 style={{ backgroundColor: 'var(--bg-card)' }}>
-                <h1 className="text-xl font-bold text-[#1E2A5E]">📬 Submissions & Grading</h1>
+                <h1 className="text-xl font-bold" style={{ color: 'var(--text-heading)' }}>📬 Submissions & Grading</h1>
                 <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>
                     Select an assignment to view and grade student submissions.
                 </p>
@@ -119,15 +119,13 @@ const TeacherSubmissions = () => {
                             onGrade={setGradingSubmission}
                         />
                     }
-                    {gradingSubmission && (
-                        <div className="mt-4">
-                            <GradingPanel
-                                submission={gradingSubmission}
-                                onClose={() => setGradingSubmission(null)}
-                                onGraded={() => loadSubmissions(selectedId)}
-                            />
-                        </div>
-                    )}
+                    <div className="mt-4">
+                        <GradingPanel
+                            submission={gradingSubmission}
+                            onClose={() => setGradingSubmission(null)}
+                            onGraded={() => loadSubmissions(selectedId)}
+                        />
+                    </div>
                 </>
             )}
         </div>

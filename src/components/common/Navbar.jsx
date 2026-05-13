@@ -59,8 +59,10 @@ const Navbar = () => {
                 <div className="relative" ref={dropdownRef}>
                     <button
                         onClick={handleBellClick}
-                        className="relative w-10 h-10 rounded-full flex items-center justify-center transition-colors hover:bg-gray-100"
-                        style={{ color: 'var(--text-primary)' }}
+                        className="relative w-10 h-10 rounded-full flex items-center justify-center transition-colors"
+                        style={{ color: 'var(--text-primary)', ':hover': undefined }}
+                        onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
+                        onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'} style={{ color: 'var(--text-primary)' }}
                         aria-label="Notifications"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

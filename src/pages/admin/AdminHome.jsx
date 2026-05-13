@@ -69,7 +69,7 @@ const AdminHome = () => {
                 className="rounded-xl shadow-sm p-5 border-l-4 border-[#1E2A5E]"
                 style={{ backgroundColor: 'var(--bg-card)' }}
             >
-                <h1 className="text-xl font-bold text-[#1E2A5E]">🛡️ Admin Dashboard</h1>
+                <h1 className="text-xl font-bold" style={{ color: 'var(--text-heading)' }}>🛡️ Admin Dashboard</h1>
                 <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>System analysis and quick reviews.</p>
             </div>
 
@@ -135,7 +135,7 @@ const AdminHome = () => {
                                 <span>Graded</span>
                                 <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{stats.submissions.graded} / {stats.submissions.total}</span>
                             </div>
-                            <div className="w-full bg-gray-200 rounded-full h-3">
+                            <div className="w-full rounded-full h-3" style={{ backgroundColor: 'var(--border)' }}>
                                 <div className="bg-green-500 h-3 rounded-full transition-all duration-500" style={{ width: `${gradedPct}%` }} />
                             </div>
                             <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{gradedPct}% graded</p>
@@ -145,23 +145,23 @@ const AdminHome = () => {
                                 <span>Pending Review</span>
                                 <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{stats.submissions.pending} / {stats.submissions.total}</span>
                             </div>
-                            <div className="w-full bg-gray-200 rounded-full h-3">
+                            <div className="w-full rounded-full h-3" style={{ backgroundColor: 'var(--border)' }}>
                                 <div className="bg-yellow-400 h-3 rounded-full transition-all duration-500" style={{ width: `${pendingPct}%` }} />
                             </div>
                             <p className="text-xs mt-1" style={{ color: 'var(--text-muted)' }}>{pendingPct}% awaiting review</p>
                         </div>
                         <div className="pt-4 border-t grid grid-cols-3 text-center gap-2" style={{ borderColor: 'var(--border)' }}>
-                            <div className="bg-blue-50 rounded-lg p-3">
-                                <p className="text-xl font-bold text-blue-600">{stats.submissions.total}</p>
-                                <p className="text-xs text-gray-500">Total</p>
+                            <div className="rounded-lg p-3" style={{ backgroundColor: 'var(--stat-blue-bg)' }}>
+                                <p className="text-xl font-bold" style={{ color: 'var(--stat-blue-text)' }}>{stats.submissions.total}</p>
+                                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Total</p>
                             </div>
-                            <div className="bg-green-50 rounded-lg p-3">
-                                <p className="text-xl font-bold text-green-600">{stats.submissions.graded}</p>
-                                <p className="text-xs text-gray-500">Graded</p>
+                            <div className="rounded-lg p-3" style={{ backgroundColor: 'var(--stat-blue-bg)' }}>
+                                <p className="text-xl font-bold" style={{ color: 'var(--stat-green-text)' }}>{stats.submissions.graded}</p>
+                                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Graded</p>
                             </div>
-                            <div className="bg-yellow-50 rounded-lg p-3">
-                                <p className="text-xl font-bold text-yellow-600">{stats.submissions.pending}</p>
-                                <p className="text-xs text-gray-500">Pending</p>
+                            <div className="rounded-lg p-3" style={{ backgroundColor: 'var(--stat-blue-bg)' }}>
+                                <p className="text-xl font-bold" style={{ color: 'var(--stat-amber-text)' }}>{stats.submissions.pending}</p>
+                                <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Pending</p>
                             </div>
                         </div>
                     </div>

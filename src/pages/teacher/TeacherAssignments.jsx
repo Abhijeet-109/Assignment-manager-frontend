@@ -41,8 +41,8 @@ const DeleteConfirm = ({ onConfirm, onCancel }) => (
             </div>
             <div className="flex gap-3 pt-2">
                 <button onClick={onCancel}
-                    className="flex-1 px-4 py-2 rounded-xl border text-sm font-medium transition-colors hover:bg-gray-100"
-                    style={{ borderColor: 'var(--border)', color: 'var(--text-primary)' }}>
+                    className="flex-1 border py-2 rounded-lg text-sm transition-colors"
+                    style={{ borderColor: 'var(--border)', color: 'var(--text-muted)' }}>
                     Cancel
                 </button>
                 <button onClick={onConfirm}
@@ -125,14 +125,14 @@ const TeacherAssignments = () => {
     const openEdit = (a) => { setEditTarget(a); setModalOpen(true); };
     const closeModal = () => { setModalOpen(false); setEditTarget(null); };
 
-   const onFormSubmit = async (form, fileObj = null) => {
-    const isEdit = !!editTarget;
-    if (isEdit) await updateAssignment(editTarget._id, form);
-    else await createAssignment(form, fileObj);
-    closeModal();
-    fetchAssignments();
-    showToast(isEdit ? '✏️ Assignment updated successfully!' : '✅ Assignment created successfully!');
-};
+    const onFormSubmit = async (form, fileObj = null) => {
+        const isEdit = !!editTarget;
+        if (isEdit) await updateAssignment(editTarget._id, form);
+        else await createAssignment(form, fileObj);
+        closeModal();
+        fetchAssignments();
+        showToast(isEdit ? '✏️ Assignment updated successfully!' : '✅ Assignment created successfully!');
+    };
     const handleDeleteClick = (id) => setDeleteId(id);
 
     const confirmDelete = async () => {
@@ -150,7 +150,7 @@ const TeacherAssignments = () => {
     const filterBtn = 'px-3 py-1.5 rounded-lg text-sm font-medium border transition-colors';
     const activeStyle = 'bg-[#1E2A5E] text-white border-[#1E2A5E]';
     const overdueStyle = 'bg-red-600 text-white border-red-600';
-    const inactiveStyle = 'border-gray-300 text-gray-600 hover:border-[#1E2A5E]';
+    const inactiveStyle = 'border-[var(--filter-btn-border)] text-[var(--filter-btn-color)] hover:border-[#1E2A5E]';
 
     const getStatusStyle = (val) => {
         if (statusFilter !== val) return inactiveStyle;
@@ -165,7 +165,7 @@ const TeacherAssignments = () => {
             {/* Header */}
             <div className="rounded-xl shadow-sm p-5 border-l-4 border-[#1E2A5E]"
                 style={{ backgroundColor: 'var(--bg-card)' }}>
-                <h1 className="text-xl font-bold text-[#1E2A5E]">📋 My Assignments</h1>
+                <h1 className="text-xl font-bold" style={{ color: 'var(--text-heading)' }}>📋 My Assignments</h1>
                 <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>
                     Create, edit and manage your assignments.
                 </p>

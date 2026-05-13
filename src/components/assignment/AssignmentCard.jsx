@@ -47,7 +47,8 @@ const AssignmentCard = ({ assignment, onEdit, onDelete, onView }) => {
 
             <div className="mt-1 flex gap-1 flex-wrap">
                 {targetDivisions.map(div => (
-                    <span key={div} className="text-xs px-2 py-0.5 rounded-full bg-blue-50 text-blue-700 border border-blue-200 font-medium">
+                    <span key={div} className="text-xs px-2 py-0.5 rounded-full font-medium border"
+                        style={{ backgroundColor: 'var(--stat-blue-bg)', color: 'var(--stat-blue-text)', borderColor: 'var(--border)' }}>
                         {div === 'All' ? '🌐 All' : `Div ${div}`}
                     </span>
                 ))}
@@ -56,7 +57,10 @@ const AssignmentCard = ({ assignment, onEdit, onDelete, onView }) => {
             <div className="mt-4 flex gap-2">
                 <button
                     onClick={() => onView(_id)}
-                    className="px-3 py-1 text-xs rounded-lg border border-gray-400 text-gray-800 hover:bg-gray-100 transition-colors font-medium">
+                    className="px-3 py-1 text-xs rounded-lg border font-medium transition-colors"
+                    style={{ borderColor: 'var(--border)', color: 'var(--text-primary)' }}
+                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
+                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
                     View
                 </button>
                 <button

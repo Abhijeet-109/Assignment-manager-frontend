@@ -4,6 +4,7 @@ import Navbar from '../components/common/Navbar';
 import AdminHome from './admin/AdminHome';
 import UserManagement from './admin/UserManagement';
 import SubjectManagement from './admin/SubjectManagement';
+import ProfilePage from './ProfilePage';
 
 const AdminDashboard = () => {
     return (
@@ -16,6 +17,7 @@ const AdminDashboard = () => {
                         <Route index element={<AdminHome />} />
                         <Route path="users" element={<UserManagement />} />
                         <Route path="subjects" element={<SubjectManagement />} />
+                        <Route path="profile" element={<ProfilePage />} />
                         <Route path="*" element={<Navigate to="/admin" replace />} />
                     </Routes>
                 </main>

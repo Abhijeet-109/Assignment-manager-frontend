@@ -1,0 +1,11 @@
+/* Light theme */
+[data-theme="light"] {
+    --bg-input: #F9FAFB;
+    /* ... your other vars */
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+    --bg-input: #1e293b;
+    /* ... your other vars */
+}

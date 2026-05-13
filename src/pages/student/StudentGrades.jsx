@@ -22,7 +22,10 @@ const StudentGrades = () => {
 
     const graded = submissions.filter(s => s.status === 'graded' && s.obtainedMarks != null);
     const avg = graded.length
-        ? Math.round(graded.reduce((acc, s) => acc + (s.obtainedMarks / s.totalMarks) * 100, 0) / graded.length)
+        ? Math.round(graded.reduce((acc, s) => {
+            const max = s.assignmentId?.maxMarks;
+            return acc + (max ? (s.obtainedMarks / max) * 100 : 0);
+        }, 0) / graded.length)
         : 0;
 
     if (loading) return <Loading />;
@@ -32,7 +35,7 @@ const StudentGrades = () => {
 
             {/* Header */}
             <div className="rounded-xl shadow-sm p-5 border-l-4 border-[#1E2A5E]" style={{ backgroundColor: 'var(--bg-card)' }}>
-                <h1 className="text-xl font-bold text-[#1E2A5E]">📊 My Grades</h1>
+                <h1 className="text-xl font-bold" style={{ color: 'var(--text-heading)' }}>📊 My Grades</h1>
                 <p className="text-sm mt-1" style={{ color: 'var(--text-muted)' }}>Your graded submission results</p>
             </div>
 
@@ -54,7 +57,7 @@ const StudentGrades = () => {
                         <p className="text-sm mt-0.5" style={{ color: 'var(--text-muted)' }}>
                             Across {graded.length} graded submission{graded.length !== 1 ? 's' : ''}
                         </p>
-                        <div className="mt-2 h-2.5 bg-gray-200 rounded-full overflow-hidden max-w-xs">
+                        <div className="mt-2 h-2.5 rounded-full overflow-hidden max-w-xs" style={{ backgroundColor: 'var(--border)' }}>
                             <div
                                 className="h-full rounded-full transition-all duration-700"
                                 style={{ width: `${avg}%`, background: 'linear-gradient(90deg,#6366f1,#8b5cf6)' }}
@@ -63,13 +66,13 @@ const StudentGrades = () => {
                     </div>
                     {/* Mini stat boxes */}
                     <div className="grid grid-cols-2 gap-2 flex-shrink-0">
-                        <div className="bg-blue-50 rounded-lg p-3 text-center">
-                            <p className="text-xl font-bold text-blue-600">{graded.length}</p>
-                            <p className="text-xs text-gray-500">Graded</p>
+                        <div className="rounded-lg p-3 text-center" style={{ backgroundColor: 'var(--stat-blue-bg)' }}>
+                            <p className="text-xl font-bold" style={{ color: 'var(--stat-blue-text)' }}>{graded.length}</p>
+                            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Graded</p>
                         </div>
-                        <div className="bg-amber-50 rounded-lg p-3 text-center">
-                            <p className="text-xl font-bold text-amber-600">{submissions.length - graded.length}</p>
-                            <p className="text-xs text-gray-500">Pending</p>
+                        <div className="rounded-lg p-3 text-center" style={{ backgroundColor: 'var(--stat-blue-bg)' }}>
+                            <p className="text-xl font-bold" style={{ color: 'var(--stat-amber-text)' }}>{submissions.length - graded.length}</p>
+                            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Pending</p>
                         </div>
                     </div>
                 </div>
@@ -97,7 +100,8 @@ const StudentGrades = () => {
                         </thead>
                         <tbody>
                             {graded.map(s => {
-                                const pct = Math.round((s.obtainedMarks / s.totalMarks) * 100);
+                                const max = s.assignmentId?.maxMarks;
+                                const pct = max ? Math.round((s.obtainedMarks / max) * 100) : 0;
                                 const { label, textColor, bg } = gradeLabel(pct);
                                 return (
                                     <tr
@@ -124,13 +128,11 @@ const StudentGrades = () => {
                                             )}
                                         </td>
                                         <td className="px-5 py-3" style={{ color: 'var(--text-muted)' }}>
-                                            {s.assignmentId?.subjectId?.name || '—'}
-                                        </td>
+                                            {s.assignmentId?.subject?.name || '—'}                                        </td>
                                         <td className="px-5 py-3 text-right">
                                             <p className="font-bold" style={{ color: 'var(--text-primary)' }}>
                                                 {s.obtainedMarks}
-                                                <span className="font-normal text-xs ml-1" style={{ color: 'var(--text-muted)' }}>/ {s.totalMarks}</span>
-                                            </p>
+                                                <span className="font-normal text-xs ml-1" style={{ color: 'var(--text-muted)' }}>/ {s.assignmentId?.maxMarks ?? '—'}</span>                                            </p>
                                             <p className="text-xs font-semibold mt-0.5" style={{ color: textColor }}>{pct}%</p>
                                         </td>
                                     </tr>

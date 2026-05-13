@@ -1,7 +1,97 @@
 import { useState, useEffect } from 'react';
 import api from '../../services/api';
 import Loading from '../../components/common/Loading';
+import { useTheme } from '../../context/ThemeContext';
 
+/* ─────────────────────────────────────────────
+   Dark Theme: Floating Purple / Pink Orbs
+───────────────────────────────────────────── */
+const DarkAuroraLayer = () => (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-xl">
+        {/* Large violet orb — top-left */}
+        <div style={{
+            position: 'absolute',
+            width: 320, height: 320,
+            borderRadius: '50%',
+            top: '-80px', left: '-80px',
+            background: 'radial-gradient(circle, rgba(139,92,246,0.55) 0%, transparent 70%)',
+            animation: 'orb-float-1 4s ease-in-out infinite',
+            filter: 'blur(45px)',
+        }} />
+        {/* Pink / fuchsia orb — top-right */}
+        <div style={{
+            position: 'absolute',
+            width: 240, height: 240,
+            borderRadius: '50%',
+            top: '-20px', right: '120px',
+            background: 'radial-gradient(circle, rgba(240,147,251,0.45) 0%, transparent 70%)',
+            animation: 'orb-float-2 5s ease-in-out infinite',
+            filter: 'blur(38px)',
+        }} />
+        {/* Indigo orb — bottom-centre */}
+        <div style={{
+            position: 'absolute',
+            width: 200, height: 200,
+            borderRadius: '50%',
+            bottom: '-50px', left: '38%',
+            background: 'radial-gradient(circle, rgba(99,102,241,0.5) 0%, transparent 70%)',
+            animation: 'orb-float-3 6s ease-in-out infinite',
+            filter: 'blur(35px)',
+        }} />
+        {/* Small accent — bottom-right */}
+        <div style={{
+            position: 'absolute',
+            width: 140, height: 140,
+            borderRadius: '50%',
+            bottom: '-20px', right: '30px',
+            background: 'radial-gradient(circle, rgba(167,139,250,0.4) 0%, transparent 70%)',
+            animation: 'orb-float-2 4s ease-in-out infinite reverse',
+            filter: 'blur(28px)',
+        }} />
+    </div>
+);
+
+/* ─────────────────────────────────────────────
+   Light Theme: Soft Sky-Blue / Cyan Blobs
+───────────────────────────────────────────── */
+const LightAuroraLayer = () => (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none rounded-xl">
+        {/* White shimmer — top-left */}
+        <div style={{
+            position: 'absolute',
+            width: 280, height: 280,
+            borderRadius: '50%',
+            top: '-60px', left: '-60px',
+            background: 'radial-gradient(circle, rgba(255,255,255,0.4) 0%, transparent 70%)',
+            animation: 'blob-drift-1 4s ease-in-out infinite',
+            filter: 'blur(32px)',
+        }} />
+        {/* Cyan blob — bottom-right */}
+        <div style={{
+            position: 'absolute',
+            width: 220, height: 220,
+            borderRadius: '50%',
+            bottom: '-40px', right: '80px',
+            background: 'radial-gradient(circle, rgba(186,230,253,0.55) 0%, transparent 70%)',
+            animation: 'blob-drift-2 5s ease-in-out infinite',
+            filter: 'blur(28px)',
+        }} />
+        {/* Teal accent — top-right */}
+        <div style={{
+            position: 'absolute',
+            width: 160, height: 160,
+            borderRadius: '50%',
+            top: '-10px', right: '20px',
+            background: 'radial-gradient(circle, rgba(103,232,249,0.35) 0%, transparent 70%)',
+            animation: 'blob-drift-1 6s ease-in-out infinite reverse',
+            filter: 'blur(22px)',
+        }} />
+    </div>
+);
+
+/* ─────────────────────────────────────────────
+   Stat Card
+───────────────────────────────────────────── */
 const StatCard = ({ label, value, icon, color }) => (
     <div
         className="rounded-xl shadow-sm p-5 flex flex-col items-center gap-2 border-t-4"
@@ -13,10 +103,16 @@ const StatCard = ({ label, value, icon, color }) => (
     </div>
 );
 
+/* ─────────────────────────────────────────────
+   Main Component
+───────────────────────────────────────────── */
 const StudentHome = () => {
     const [stats, setStats] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+
+    const { theme } = useTheme();
+    const isDark = theme === 'dark';
 
     useEffect(() => {
         api.get('/dashboard/student')
@@ -33,21 +129,30 @@ const StudentHome = () => {
     const offset = circumference * (1 - progressPct / 100);
 
     const statCards = [
-        { label: 'Subjects', value: stats?.totalSubjects ?? 0, icon: '📘', color: '#3B82F6' },
-        { label: 'Assignments', value: stats?.totalAssignments ?? 0, icon: '📝', color: '#8B5CF6' },
-        { label: 'Completed', value: stats?.completedAssignments ?? 0, icon: '✅', color: '#10B981' },
-        { label: 'Pending', value: stats?.pendingAssignments ?? 0, icon: '⏳', color: '#F59E0B' },
+        { label: 'Subjects', value: stats?.totalSubjects, icon: '📘', color: '#3B82F6' },
+        { label: 'Assignments', value: stats?.totalAssignments, icon: '📝', color: '#8B5CF6' },
+        { label: 'Completed', value: stats?.completedAssignments, icon: '✅', color: '#10B981' },
+        { label: 'Pending', value: stats?.pendingAssignments, icon: '⏳', color: '#F59E0B' },
     ];
+
+    /* ── Banner background per theme ── */
+    const bannerBg = isDark
+        ? 'linear-gradient(135deg, #1a0533 0%, #2d0a6e 50%, #1a0533 100%)'
+        : 'linear-gradient(135deg, #0ea5e9 0%, #06b6d4 50%, #0284c7 100%)';
 
     return (
         <div className="space-y-6">
 
-            {/* Welcome Banner — brand gradient, always stays */}
+            {/* ── Welcome Banner ── */}
             <div
                 className="relative overflow-hidden rounded-xl p-7 flex items-center justify-between"
-                style={{ background: 'linear-gradient(135deg,#667eea 0%,#764ba2 50%,#f093fb 100%)' }}
+                style={{ background: bannerBg, minHeight: '140px' }}
             >
-                <div>
+                {/* Animated background layer */}
+                {isDark ? <DarkAuroraLayer /> : <LightAuroraLayer />}
+
+                {/* Text — sits above the animation */}
+                <div className="relative z-10">
                     <h1 className="text-white text-2xl font-bold mb-1">🎓 Student Dashboard</h1>
                     <p className="text-white/85 text-sm max-w-md leading-relaxed">
                         {stats?.pendingAssignments > 0
@@ -55,11 +160,17 @@ const StudentHome = () => {
                             : 'All caught up! Great work.'}
                     </p>
                 </div>
-                <div className="relative w-24 h-24 flex-shrink-0">
+
+                {/* Progress Ring — sits above the animation */}
+                <div className="relative z-10 w-24 h-24 flex-shrink-0">
                     <svg width="96" height="96" viewBox="0 0 96 96" style={{ transform: 'rotate(-90deg)' }}>
                         <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.25)" strokeWidth="7" />
-                        <circle cx="48" cy="48" r="38" fill="none" stroke="rgba(255,255,255,0.9)"
-                            strokeWidth="7" strokeLinecap="round"
+                        <circle
+                            cx="48" cy="48" r="38"
+                            fill="none"
+                            stroke="rgba(255,255,255,0.9)"
+                            strokeWidth="7"
+                            strokeLinecap="round"
                             strokeDasharray={circumference}
                             strokeDashoffset={offset}
                         />
@@ -71,18 +182,18 @@ const StudentHome = () => {
                 </div>
             </div>
 
-            {/* Stat Cards — same pattern as AdminHome */}
+            {/* ── Stat Cards ── */}
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {statCards.map(c => <StatCard key={c.label} {...c} />)}
             </div>
 
-            {/* Two Column Section */}
+            {/* ── Two Column Section ── */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
 
                 {/* Upcoming Deadlines */}
                 <div className="rounded-xl shadow-sm overflow-hidden" style={{ backgroundColor: 'var(--bg-card)' }}>
-                    <div className="flex items-center justify-between bg-[#1E2A5E] px-5 py-3">
-                        <h2 className="text-white font-semibold text-sm">📅 Upcoming Deadlines</h2>
+                    <div className="flex items-center justify-between px-5 py-3"
+                        style={{ backgroundColor: 'var(--bg-sidebar)' }}>                        <h2 className="text-white font-semibold text-sm">📅 Upcoming Deadlines</h2>
                         <span className="text-blue-300 text-xs">
                             {stats?.upcomingDeadlines?.length ?? 0} due
                         </span>
@@ -116,8 +227,8 @@ const StudentHome = () => {
 
                 {/* Subject Progress */}
                 <div className="rounded-xl shadow-sm overflow-hidden" style={{ backgroundColor: 'var(--bg-card)' }}>
-                    <div className="bg-[#1E2A5E] px-5 py-3 flex items-center justify-between">
-                        <h2 className="text-white font-semibold text-sm">🏆 Subject Progress</h2>
+                    <div className="flex items-center justify-between px-5 py-3"
+                        style={{ backgroundColor: 'var(--bg-sidebar)' }}>                        <h2 className="text-white font-semibold text-sm">🏆 Subject Progress</h2>
                         <span className="text-blue-300 text-xs">Top 5</span>
                     </div>
                     <div className="p-4 space-y-4">
@@ -146,6 +257,7 @@ const StudentHome = () => {
                         ))}
                     </div>
                 </div>
+
             </div>
         </div>
     );

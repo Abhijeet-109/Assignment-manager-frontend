@@ -14,29 +14,69 @@
 :root,
 [data-theme="light"] {
   color-scheme: light;
-  --bg-page:      #F3F4F6;
-  --bg-card:      #FFFFFF;
-  --bg-sidebar:   #1E2A5E;
-  --bg-navbar:    #FFFFFF;
-  --text-primary: #111827;
-  --text-muted:   #6B7280;
-  --text-heading: #1E2A5E;
-  --border:       #E5E7EB;
-  --hover-row:    #F9FAFB;
+  --bg-page:        #F3F4F6;
+  --bg-card:        #FFFFFF;
+  --bg-sidebar:     #1E2A5E;
+  --bg-navbar:      #FFFFFF;
+  --bg-input:       #F9FAFB;
+  --text-primary:   #111827;
+  --text-muted:     #6B7280;
+  --text-heading:   #1E2A5E;
+  --border:         #E5E7EB;
+  --hover-row:      #F9FAFB;
+
+  /* Mini stat cards */
+  --stat-blue-bg:   #EFF6FF;
+  --stat-blue-text: #2563EB;
+  --stat-green-bg:  #F0FDF4;
+  --stat-green-text:#16A34A;
+  --stat-amber-bg:  #FFFBEB;
+  --stat-amber-text:#D97706;
+
+  /* Filter inactive button */
+  --filter-btn-color: #374151;
+  --filter-btn-border: #D1D5DB;
+
+  /* Export button */
+  --export-btn-bg:    #1E2A5E;
+  --export-btn-text:  #FFFFFF;
+
+  /* Division label */
+  --division-label:   #1E2A5E;
 }
 
 /* ── Dark Theme ── */
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg-page:      #0F172A;
-  --bg-card:      #1E293B;
-  --bg-sidebar:   #0F172A;
-  --bg-navbar:    #1E293B;
-  --text-primary: #F1F5F9;
-  --text-muted:   #94A3B8;
-  --text-heading: #93C5FD;
-  --border:       #334155;
-  --hover-row:    #1E293B;
+  --bg-page:        #0F172A;
+  --bg-card:        #1E293B;
+  --bg-sidebar:     #0F172A;
+  --bg-navbar:      #1E293B;
+  --bg-input:       #0F172A;
+  --text-primary:   #F1F5F9;
+  --text-muted:     #94A3B8;
+  --text-heading:   #93C5FD;
+  --border:         #334155;
+  --hover-row:      #263550;
+
+  /* Mini stat cards */
+  --stat-blue-bg:   #1e3a5f;
+  --stat-blue-text: #93C5FD;
+  --stat-green-bg:  #14532d;
+  --stat-green-text:#86EFAC;
+  --stat-amber-bg:  #431407;
+  --stat-amber-text:#FCD34D;
+
+  /* Filter inactive button */
+  --filter-btn-color: #CBD5E1;
+  --filter-btn-border: #475569;
+
+  /* Export button */
+  --export-btn-bg:    #334155;
+  --export-btn-text:  #F1F5F9;
+
+  /* Division label */
+  --division-label:   #93C5FD;
 }
 
 html {
