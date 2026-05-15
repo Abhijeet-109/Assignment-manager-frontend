@@ -23,9 +23,18 @@ export const NotificationProvider = ({ children }) => {
     // Poll every 30 seconds
     useEffect(() => {
         if (!user) return;
-        fetchNotifications();
+
+        // Small delay ensures token is stored before first fetch fires
+        const initialTimer = setTimeout(() => {
+            fetchNotifications();
+        }, 500);
+
         intervalRef.current = setInterval(fetchNotifications, 30000);
-        return () => clearInterval(intervalRef.current);
+
+        return () => {
+            clearTimeout(initialTimer);
+            clearInterval(intervalRef.current);
+        };
     }, [user, fetchNotifications]);
 
     const markAsRead = async (id) => {

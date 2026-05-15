@@ -227,8 +227,13 @@ const ProfilePage = () => {
 
             {/* Alert */}
             {msg.text && (
-                <div className={`px-4 py-3 rounded-lg text-sm font-medium ${msg.type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
-                    {msg.text}
+                <div className={`fixed bottom-6 right-6 z-[9999] px-5 py-3 rounded-xl shadow-lg text-sm font-medium transition-all
+        ${msg.type === 'success'
+                        ? 'bg-green-600 text-white'
+                        : 'bg-red-600 text-white'
+                    }`}
+                >
+                    {msg.type === 'success' ? '✓ ' : '✕ '}{msg.text}
                 </div>
             )}
 

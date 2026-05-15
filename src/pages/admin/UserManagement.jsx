@@ -296,7 +296,21 @@ const UserManagement = () => {
                                 <Field label="Department" required {...f('department')} placeholder="MCA" />
                                 <div className="grid grid-cols-2 gap-3">
                                     <Field label="Division" required {...f('division')} placeholder="A" />
-                                    <Field label="Semester" required type="number" {...f('semester')} placeholder="1" />
+                                    <div>
+                                        <label className="block text-xs mb-1" style={{ color: 'var(--text-muted)' }}>
+                                            Semester <span className="text-red-500">*</span>
+                                        </label>
+                                        <input
+                                            type="number"
+                                            min={1}
+                                            max={4}
+                                            value={form.semester || ''}
+                                            onChange={e => setForm(p => ({ ...p, semester: e.target.value }))}
+                                            placeholder="1 - 4"
+                                            className="w-full border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#1E2A5E]"
+                                            style={{ borderColor: 'var(--border)', backgroundColor: 'var(--bg-page)', color: 'var(--text-primary)' }}
+                                        />
+                                    </div>
                                 </div>
                             </>}
                         </div>
