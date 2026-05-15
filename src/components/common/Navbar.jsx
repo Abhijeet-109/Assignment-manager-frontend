@@ -1,3 +1,5 @@
+// Path: frontend/src/components/common/Navbar.jsx
+
 import { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useNotifications } from '../../context/NotificationContext';
@@ -15,13 +17,12 @@ const typeIcon = (type) => {
     return icons[type] || '🔔';
 };
 
-const Navbar = () => {
+const Navbar = ({ onMenuClick }) => {
     const { user } = useAuth();
     const { notifications, unreadCount, markAsRead, markAllAsRead, deleteNotification, deleteAllRead } = useNotifications();
     const [open, setOpen] = useState(false);
     const dropdownRef = useRef(null);
 
-    // Close on outside click
     useEffect(() => {
         const handler = (e) => {
             if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -32,37 +33,55 @@ const Navbar = () => {
         return () => document.removeEventListener('mousedown', handler);
     }, []);
 
-    const handleBellClick = () => setOpen(prev => !prev);
-
     const handleNotificationClick = (n) => {
         if (!n.isRead) markAsRead(n._id);
     };
 
     return (
         <header
-            className="h-20 flex items-center justify-between px-8 shadow-sm flex-shrink-0 border-b"
+            className="h-16 md:h-20 flex items-center justify-between px-4 md:px-8 shadow-sm flex-shrink-0 border-b"
             style={{
                 backgroundColor: 'var(--bg-navbar)',
                 borderColor: 'var(--border)',
                 color: 'var(--text-primary)',
             }}
         >
-            <p className="font-medium text-lg" style={{ color: 'var(--text-primary)' }}>
-                Welcome back,{' '}
-                <span className="font-bold" style={{ color: 'var(--text-heading)' }}>
-                    {user?.firstName || user?.name}
-                </span>! 👋
-            </p>
-
+            {/* Left side: hamburger (mobile) + welcome text */}
             <div className="flex items-center gap-3">
+                {/* Hamburger — mobile only */}
+                <button
+                    onClick={onMenuClick}
+                    className="md:hidden w-9 h-9 flex items-center justify-center rounded-lg transition-colors"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
+                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
+                    aria-label="Open menu"
+                >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+
+                {/* Welcome text — truncated on mobile */}
+                <p className="font-medium text-sm md:text-lg truncate max-w-[160px] md:max-w-none" style={{ color: 'var(--text-primary)' }}>
+                    Welcome,{' '}
+                    <span className="font-bold" style={{ color: 'var(--text-heading)' }}>
+                        {user?.firstName || user?.name}
+                    </span>! 👋
+                </p>
+            </div>
+
+            {/* Right side: bell + role badge */}
+            <div className="flex items-center gap-2 md:gap-3">
+
                 {/* ── Notification Bell ── */}
                 <div className="relative" ref={dropdownRef}>
                     <button
-                        onClick={handleBellClick}
-                        className="relative w-10 h-10 rounded-full flex items-center justify-center transition-colors"
-                        style={{ color: 'var(--text-primary)', ':hover': undefined }}
+                        onClick={() => setOpen(prev => !prev)}
+                        className="relative w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center transition-colors"
+                        style={{ color: 'var(--text-primary)' }}
                         onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
-                        onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'} style={{ color: 'var(--text-primary)' }}
+                        onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
                         aria-label="Notifications"
                     >
                         <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,7 +98,7 @@ const Navbar = () => {
                     {/* ── Dropdown ── */}
                     {open && (
                         <div
-                            className="absolute right-0 top-12 w-80 rounded-xl shadow-2xl border z-50 overflow-hidden"
+                            className="absolute right-0 top-12 w-72 md:w-80 rounded-xl shadow-2xl border z-50 overflow-hidden"
                             style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border)' }}
                         >
                             {/* Header */}
@@ -117,8 +136,7 @@ const Navbar = () => {
                                         <div
                                             key={n._id}
                                             onClick={() => handleNotificationClick(n)}
-                                            className={`flex items-start gap-3 px-4 py-3 cursor-pointer transition-colors hover:bg-opacity-50
-                                                ${!n.isRead ? 'bg-blue-50' : ''}`}
+                                            className="flex items-start gap-3 px-4 py-3 cursor-pointer transition-colors"
                                             style={!n.isRead ? { backgroundColor: 'rgba(59,130,246,0.07)' } : {}}
                                         >
                                             <span className="text-lg flex-shrink-0 mt-0.5">{typeIcon(n.type)}</span>
@@ -151,7 +169,7 @@ const Navbar = () => {
                 </div>
 
                 {/* ── Role Badge ── */}
-                <span className="font-semibold capitalize bg-[#1E2A5E] text-white px-3 py-1 rounded-full text-sm tracking-wide">
+                <span className="hidden sm:inline font-semibold capitalize bg-[#1E2A5E] text-white px-3 py-1 rounded-full text-sm tracking-wide">
                     {user?.role}
                 </span>
             </div>

@@ -1,3 +1,6 @@
+// Path: frontend/src/pages/AdminDashboard.jsx
+
+import { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Sidebar from '../components/common/Sidebar';
 import Navbar from '../components/common/Navbar';
@@ -7,12 +10,14 @@ import SubjectManagement from './admin/SubjectManagement';
 import ProfilePage from './ProfilePage';
 
 const AdminDashboard = () => {
+    const [sidebarOpen, setSidebarOpen] = useState(false);
+
     return (
         <div className="flex h-screen overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
-            <Sidebar />
+            <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
             <div className="flex-1 flex flex-col min-w-0">
-                <Navbar />
-                <main className="flex-1 p-6 overflow-y-auto">
+                <Navbar onMenuClick={() => setSidebarOpen(true)} />
+                <main className="flex-1 p-4 md:p-6 overflow-y-auto">
                     <Routes>
                         <Route index element={<AdminHome />} />
                         <Route path="users" element={<UserManagement />} />

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import Button from '../common/Button';
 import Modal from '../common/Modal';
+import UserAvatar from '../common/UserAvatar';
 import { gradeSubmission, updateGrade } from '../../services/submissionService';
 import { formatDate } from '../../utils/dateFormatter';
 
@@ -66,9 +67,7 @@ const GradingPanel = ({ submission, onClose, onGraded }) => {
             {/* Student Info Row */}
             <div className="flex items-center gap-3 mb-4 p-3 rounded-lg" style={{ backgroundColor: 'var(--bg-page)' }}>
                 {/* Avatar */}
-                <div className="w-10 h-10 rounded-full bg-[#1E2A5E] flex items-center justify-center text-white font-bold text-sm flex-shrink-0">
-                    {studentName.charAt(0).toUpperCase()}
-                </div>
+                <UserAvatar user={submission?.submittedBy} size="md" />
                 <div className="flex-1 min-w-0">
                     <p className="font-semibold text-sm truncate" style={{ color: 'var(--text-primary)' }}>{studentName}</p>
                     <p className="text-xs truncate" style={{ color: 'var(--text-muted)' }}>{studentEmail}</p>
