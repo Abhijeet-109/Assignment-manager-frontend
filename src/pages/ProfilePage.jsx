@@ -218,7 +218,7 @@ const ProfilePage = () => {
     const displayAvatar = avatarPreview
         ? avatarPreview
         : user?.avatar
-            ? `${BACKEND_URL}/${user.avatar}`
+            ? user.avatar.startsWith('http') ? user.avatar : `${BACKEND_URL}/${user.avatar}`
             : null;
 
     return (

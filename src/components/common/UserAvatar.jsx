@@ -15,7 +15,9 @@ const UserIcon = ({ className }) => (
 const UserAvatar = ({ user, size = 'md', className = '' }) => {
     const sizeClass = sizes[size] || sizes.md;
     const avatarUrl = user?.avatar
-        ? `${BACKEND_URL}/${user.avatar}?t=${user.updatedAt || '1'}`  // cache bust
+        ? user.avatar.startsWith('http')
+            ? user.avatar
+            : `${BACKEND_URL}/${user.avatar}?t=${user.updatedAt || '1'}`
         : null;
 
     if (avatarUrl) {
