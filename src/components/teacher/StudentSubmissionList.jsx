@@ -46,20 +46,20 @@ const StudentSubmissionList = ({ submissions, onGrade }) => {
                                 {formatDate(s.submittedAt)}
                             </td>
                             <td className="px-4 py-3">
-                                {s.file?.fileUrl
-                                    ?
-                                    <a href={s.file.fileUrl.startsWith('/uploads/')
-                                        ? `${(import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '')}${s.file.fileUrl}`
-                                        : s.file.fileUrl
-                                    }
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className="text-blue-500 hover:underline"
-                                    >
-                                        View File
-                                    </a>
-                                    : <span style={{ color: 'var(--text-muted)' }}>No file</span>
-                                }
+                                {s.file?.fileUrl ? (
+                                    <div className="flex gap-2">
+                                        <a
+                                            href={s.file.fileUrl}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="text-blue-500 hover:underline text-xs"
+                                        >
+                                            View File
+                                        </a>    
+                                    </div>
+                                ) : (
+                                    <span>No file</span>
+                                )}
                             </td>
                             <td className="px-4 py-3">
                                 <span className={`px-2 py-0.5 rounded-full text-xs font-medium capitalize ${badge(s.status)}`}>

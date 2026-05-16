@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import api from '../../services/api';
 import Loading from '../../components/common/Loading';
 
@@ -15,17 +15,18 @@ const getDueBadge = (dueDate, subStatus) => {
 };
 
 // ─── PDF/File Viewer Modal ───────────────────────────────────────────────────
+
 const ViewerModal = ({ assignment, onClose }) => {
     const fileUrl = assignment.assignmentId?.fileUrl;
     const isLocal = fileUrl && fileUrl.startsWith('/uploads/');
     const SERVER_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5000/api').replace('/api', '');
     const fullUrl = isLocal ? `${SERVER_BASE}${fileUrl}` : fileUrl;
-    const isPdf = fullUrl?.toLowerCase().endsWith('.pdf') || fullUrl?.includes('pdf');
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
-            <div className="w-full max-w-4xl h-[90vh] rounded-2xl shadow-2xl flex flex-col overflow-hidden"
+            <div className="w-full max-w-lg rounded-2xl shadow-2xl flex flex-col overflow-hidden"
                 style={{ backgroundColor: 'var(--bg-card)' }}>
+
                 {/* Header */}
                 <div className="flex items-center justify-between px-5 py-4 bg-[#1E2A5E] flex-shrink-0">
                     <div>
@@ -40,7 +41,7 @@ const ViewerModal = ({ assignment, onClose }) => {
                         </p>
                     </div>
                     <button onClick={onClose}
-                        className="text-white/70 hover:text-white text-2xl leading-none transition-colors">×</button>
+                        className="text-white/70 hover:text-white text-2xl leading-none">×</button>
                 </div>
 
                 {/* Description */}
@@ -55,31 +56,27 @@ const ViewerModal = ({ assignment, onClose }) => {
                     </div>
                 )}
 
-                {/* File viewer */}
-                <div className="flex-1 overflow-hidden">
+                {/* File Action */}
+                <div className="flex flex-col items-center justify-center py-10 gap-4"
+                    style={{ backgroundColor: 'var(--bg-page)' }}>
                     {!fullUrl ? (
-                        <div className="h-full flex flex-col items-center justify-center"
-                            style={{ color: 'var(--text-muted)' }}>
-                            <p className="text-4xl mb-3">📭</p>
-                            <p className="font-medium">No file attached to this assignment</p>
-                            <p className="text-sm mt-1">Teacher has not uploaded a document</p>
-                        </div>
-                    ) : isPdf ? (
-                        <iframe
-                            src={fullUrl}
-                            className="w-full h-full border-0"
-                            title="Assignment PDF"
-                        />
+                        <>
+                            <p className="text-4xl">🚫</p>
+                            <p className="text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
+                                No file attached to this assignment
+                            </p>
+                        </>
                     ) : (
-                        <div className="h-full flex flex-col items-center justify-center gap-4"
-                            style={{ color: 'var(--text-muted)' }}>
-                            <p className="text-4xl">📎</p>
-                            <p className="text-sm">File cannot be previewed in browser</p>
+                        <>
+                            <p className="text-5xl">📄</p>
+                            <p className="text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
+                                Assignment file is ready to view
+                            </p>
                             <a href={fullUrl} target="_blank" rel="noopener noreferrer"
-                                className="bg-[#1E2A5E] hover:bg-[#2D3A7C] text-white text-sm font-semibold px-5 py-2.5 rounded-lg transition-all">
-                                ⬇ Download File
+                                className="bg-[#1E2A5E] hover:bg-[#2D3A7C] text-white text-sm font-semibold px-6 py-2.5 rounded-lg transition-all">
+                                View File
                             </a>
-                        </div>
+                        </>
                     )}
                 </div>
             </div>
