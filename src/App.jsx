@@ -7,6 +7,7 @@ import RegisterPage from './pages/RegisterPage';
 import AdminDashboard from './pages/AdminDashboard';
 import TeacherDashboard from './pages/TeacherDashboard';
 import StudentDashboard from './pages/StudentDashboard';
+import { NotificationProvider } from './context/NotificationContext';
 
 // Prevents logged-in users from accessing /login or /register
 const PublicRoute = ({ children }) => {
@@ -22,36 +23,38 @@ const PublicRoute = ({ children }) => {
 function App() {
     return (
         <AuthProvider>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<LandingPage />} />
+            <NotificationProvider>
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<LandingPage />} />
 
-                    <Route path="/login" element={
-                        <PublicRoute><LoginPage /></PublicRoute>
-                    } />
-                    <Route path="/register" element={
-                        <PublicRoute><RegisterPage /></PublicRoute>
-                    } />
+                        <Route path="/login" element={
+                            <PublicRoute><LoginPage /></PublicRoute>
+                        } />
+                        <Route path="/register" element={
+                            <PublicRoute><RegisterPage /></PublicRoute>
+                        } />
 
-                    <Route path="/admin/*" element={
-                        <ProtectedRoute allowedRoles={['admin']}>
-                            <AdminDashboard />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/teacher/*" element={
-                        <ProtectedRoute allowedRoles={['teacher']}>
-                            <TeacherDashboard />
-                        </ProtectedRoute>
-                    } />
-                    <Route path="/student/*" element={
-                        <ProtectedRoute allowedRoles={['student']}>
-                            <StudentDashboard />
-                        </ProtectedRoute>
-                    } />
+                        <Route path="/admin/*" element={
+                            <ProtectedRoute allowedRoles={['admin']}>
+                                <AdminDashboard />
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/teacher/*" element={
+                            <ProtectedRoute allowedRoles={['teacher']}>
+                                <TeacherDashboard />
+                            </ProtectedRoute>
+                        } />
+                        <Route path="/student/*" element={
+                            <ProtectedRoute allowedRoles={['student']}>
+                                <StudentDashboard />
+                            </ProtectedRoute>
+                        } />
 
-                    <Route path="*" element={<Navigate to="/" replace />} />
-                </Routes>
-            </BrowserRouter>
+                        <Route path="*" element={<Navigate to="/" replace />} />
+                    </Routes>
+                </BrowserRouter>
+            </NotificationProvider>
         </AuthProvider>
     );
 }
