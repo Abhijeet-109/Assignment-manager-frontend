@@ -87,41 +87,43 @@ const AdminHome = () => {
                         <h2 className="text-white font-semibold text-sm">👥 Recent Users</h2>
                         <a href="/admin/users" className="text-blue-300 text-xs hover:underline">View All</a>
                     </div>
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr className="text-left border-b" style={{ color: 'var(--text-muted)', borderColor: 'var(--border)' }}>
-                                <th className="px-4 py-2">Name</th>
-                                <th className="px-4 py-2">Role</th>
-                                <th className="px-4 py-2">Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {recentUsers.map(u => (
-                                <tr
-                                    key={u._id}
-                                    className="border-b transition-colors"
-                                    style={{ borderColor: 'var(--border)' }}
-                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
-                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
-                                >
-                                    <td className="px-4 py-3">
-                                        <p className="font-medium" style={{ color: 'var(--text-primary)' }}>{u.firstName} {u.lastName}</p>
-                                        <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{u.email}</p>
-                                    </td>
-                                    <td className="px-4 py-3">
-                                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium capitalize ${roleBadgeColor[u.role] || 'bg-gray-100 text-gray-600'}`}>
-                                            {u.role}
-                                        </span>
-                                    </td>
-                                    <td className="px-4 py-3">
-                                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${u.isActive !== false ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'}`}>
-                                            {u.isActive !== false ? 'Active' : 'Inactive'}
-                                        </span>
-                                    </td>
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                            <thead>
+                                <tr className="text-left border-b" style={{ color: 'var(--text-muted)', borderColor: 'var(--border)' }}>
+                                    <th className="px-4 py-2 whitespace-nowrap">Name</th>
+                                    <th className="px-4 py-2 whitespace-nowrap">Role</th>
+                                    <th className="px-4 py-2 whitespace-nowrap">Status</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                {recentUsers.map(u => (
+                                    <tr
+                                        key={u._id}
+                                        className="border-b transition-colors"
+                                        style={{ borderColor: 'var(--border)' }}
+                                        onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
+                                        onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
+                                    >
+                                        <td className="px-4 py-3 whitespace-nowrap">
+                                            <p className="font-medium" style={{ color: 'var(--text-primary)' }}>{u.firstName} {u.lastName}</p>
+                                            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{u.email}</p>
+                                        </td>
+                                        <td className="px-4 py-3 whitespace-nowrap">
+                                            <span className={`text-xs px-2 py-0.5 rounded-full font-medium capitalize ${roleBadgeColor[u.role] || 'bg-gray-100 text-gray-600'}`}>
+                                                {u.role}
+                                            </span>
+                                        </td>
+                                        <td className="px-4 py-3 whitespace-nowrap">
+                                            <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${u.isActive !== false ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'}`}>
+                                                {u.isActive !== false ? 'Active' : 'Inactive'}
+                                            </span>
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
 
                 {/* Submission Progress */}

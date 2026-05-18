@@ -399,7 +399,7 @@ const StudentAssignments = () => {
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-4 gap-4">
+            <div className="grid grid-cols-4 gap-2">
                 {[
                     { label: 'Total', val: counts.total, color: '#6366F1' },
                     { label: 'Pending', val: counts.pending, color: '#F59E0B' },
@@ -415,7 +415,7 @@ const StudentAssignments = () => {
             </div>
 
             {/* Filters */}
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
                 {['all', 'pending', 'completed', 'overdue'].map(f => (
                     <button key={f} onClick={() => setFilter(f)}
                         className={`px-4 py-2 rounded-lg text-xs font-semibold border transition-all capitalize

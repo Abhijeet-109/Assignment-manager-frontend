@@ -198,7 +198,7 @@ const StudentSelfUploads = () => {
             </div>
 
             {/* ── Stats row ── */}
-            <div className="grid grid-cols-4 gap-3">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
                     { label: 'Total', value: uploads.length, color: 'var(--stat-blue-text)', bg: 'var(--stat-blue-bg)' },
                     { label: 'PDFs', value: uploads.filter(u => u.file?.fileType === 'pdf').length, color: '#EF4444', bg: '#FEE2E2' },

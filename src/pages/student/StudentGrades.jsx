@@ -44,20 +44,20 @@ const StudentGrades = () => {
                 <div className="bg-[#1E2A5E] px-5 py-3">
                     <h2 className="text-white font-semibold text-sm">📈 Overall Performance</h2>
                 </div>
-                <div className="p-5 flex items-center gap-6">
-                    <div className="text-5xl font-bold" style={{
+                <div className="p-5 flex flex-wrap items-center sm:items-start text-center sm:text-left gap-6">
+                    <div className="text-5xl font-bold flex-shrink-0" style={{
                         background: 'linear-gradient(135deg,#6366f1,#8b5cf6)',
                         WebkitBackgroundClip: 'text',
                         WebkitTextFillColor: 'transparent'
                     }}>
                         {avg}%
                     </div>
-                    <div className="flex-1">
+                    <div className="flex-1 w-full sm:w-auto">
                         <p className="font-semibold" style={{ color: 'var(--text-primary)' }}>Average Score</p>
                         <p className="text-sm mt-0.5" style={{ color: 'var(--text-muted)' }}>
                             Across {graded.length} graded submission{graded.length !== 1 ? 's' : ''}
                         </p>
-                        <div className="mt-2 h-2.5 rounded-full overflow-hidden max-w-xs" style={{ backgroundColor: 'var(--border)' }}>
+                        <div className="mt-2 h-2.5 rounded-full overflow-hidden max-w-xs mx-auto sm:mx-0" style={{ backgroundColor: 'var(--border)' }}>
                             <div
                                 className="h-full rounded-full transition-all duration-700"
                                 style={{ width: `${avg}%`, background: 'linear-gradient(90deg,#6366f1,#8b5cf6)' }}
@@ -65,7 +65,7 @@ const StudentGrades = () => {
                         </div>
                     </div>
                     {/* Mini stat boxes */}
-                    <div className="grid grid-cols-2 gap-2 flex-shrink-0">
+                    <div className="grid grid-cols-2 gap-2 flex-shrink-0 w-full sm:w-auto">
                         <div className="rounded-lg p-3 text-center" style={{ backgroundColor: 'var(--stat-blue-bg)' }}>
                             <p className="text-xl font-bold" style={{ color: 'var(--stat-blue-text)' }}>{graded.length}</p>
                             <p className="text-xs" style={{ color: 'var(--text-muted)' }}>Graded</p>
@@ -89,57 +89,59 @@ const StudentGrades = () => {
                         <p className="text-sm mt-1">Your teacher hasn't graded any submissions</p>
                     </div>
                 ) : (
-                    <table className="w-full text-sm">
-                        <thead>
-                            <tr className="text-left border-b" style={{ color: 'var(--text-muted)', borderColor: 'var(--border)' }}>
-                                <th className="px-5 py-2">Grade</th>
-                                <th className="px-5 py-2">Assignment</th>
-                                <th className="px-5 py-2">Subject</th>
-                                <th className="px-5 py-2 text-right">Score</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {graded.map(s => {
-                                const max = s.assignmentId?.maxMarks;
-                                const pct = max ? Math.round((s.obtainedMarks / max) * 100) : 0;
-                                const { label, textColor, bg } = gradeLabel(pct);
-                                return (
-                                    <tr
-                                        key={s._id}
-                                        className="border-b transition-colors"
-                                        style={{ borderColor: 'var(--border)' }}
-                                        onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
-                                        onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
-                                    >
-                                        <td className="px-5 py-3">
-                                            <span
-                                                className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold"
-                                                style={{ backgroundColor: bg, color: textColor }}
-                                            >
-                                                {label}
-                                            </span>
-                                        </td>
-                                        <td className="px-5 py-3">
-                                            <p className="font-medium" style={{ color: 'var(--text-primary)' }}>
-                                                {s.assignmentId?.title || 'Assignment'}
-                                            </p>
-                                            {s.feedback && (
-                                                <p className="text-xs mt-0.5 italic" style={{ color: 'var(--text-muted)' }}>"{s.feedback}"</p>
-                                            )}
-                                        </td>
-                                        <td className="px-5 py-3" style={{ color: 'var(--text-muted)' }}>
-                                            {s.assignmentId?.subject?.name || '—'}                                        </td>
-                                        <td className="px-5 py-3 text-right">
-                                            <p className="font-bold" style={{ color: 'var(--text-primary)' }}>
-                                                {s.obtainedMarks}
-                                                <span className="font-normal text-xs ml-1" style={{ color: 'var(--text-muted)' }}>/ {s.assignmentId?.maxMarks ?? '—'}</span>                                            </p>
-                                            <p className="text-xs font-semibold mt-0.5" style={{ color: textColor }}>{pct}%</p>
-                                        </td>
-                                    </tr>
-                                );
-                            })}
-                        </tbody>
-                    </table>
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                            <thead>
+                                <tr className="text-left border-b" style={{ color: 'var(--text-muted)', borderColor: 'var(--border)' }}>
+                                    <th className="px-5 py-2">Grade</th>
+                                    <th className="px-5 py-2 whitespace-nowrap">Assignment</th>
+                                    <th className="px-5 py-2 whitespace-nowrap">Subject</th>
+                                    <th className="px-5 py-2 text-right">Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {graded.map(s => {
+                                    const max = s.assignmentId?.maxMarks;
+                                    const pct = max ? Math.round((s.obtainedMarks / max) * 100) : 0;
+                                    const { label, textColor, bg } = gradeLabel(pct);
+                                    return (
+                                        <tr
+                                            key={s._id}
+                                            className="border-b transition-colors"
+                                            style={{ borderColor: 'var(--border)' }}
+                                            onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
+                                            onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}
+                                        >
+                                            <td className="px-5 py-3">
+                                                <span
+                                                    className="w-9 h-9 rounded-lg flex items-center justify-center text-sm font-bold"
+                                                    style={{ backgroundColor: bg, color: textColor }}
+                                                >
+                                                    {label}
+                                                </span>
+                                            </td>
+                                            <td className="px-5 py-3 whitespace-nowrap">
+                                                <p className="font-medium" style={{ color: 'var(--text-primary)' }}>
+                                                    {s.assignmentId?.title || 'Assignment'}
+                                                </p>
+                                                {s.feedback && (
+                                                    <p className="text-xs mt-0.5 italic" style={{ color: 'var(--text-muted)' }}>"{s.feedback}"</p>
+                                                )}
+                                            </td>
+                                            <td className="px-5 py-3 whitespace-nowrap" style={{ color: 'var(--text-muted)' }}>
+                                                {s.assignmentId?.subject?.name || '—'}                                        </td>
+                                            <td className="px-5 py-3 text-right whitespace-nowrap">
+                                                <p className="font-bold" style={{ color: 'var(--text-primary)' }}>
+                                                    {s.obtainedMarks}
+                                                    <span className="font-normal text-xs ml-1" style={{ color: 'var(--text-muted)' }}>/ {s.assignmentId?.maxMarks ?? '—'}</span>                                            </p>
+                                                <p className="text-xs font-semibold mt-0.5" style={{ color: textColor }}>{pct}%</p>
+                                            </td>
+                                        </tr>
+                                    );
+                                })}
+                            </tbody>
+                        </table>
+                    </div>
                 )}
             </div>
         </div>

@@ -111,7 +111,7 @@ const StudentHome = () => {
 
             {/* ── Welcome Banner ── */}
             <div
-                className="relative overflow-hidden rounded-xl p-7 flex items-center justify-between"
+                className="relative overflow-hidden rounded-xl p-7 flex items-center justify-between gap-4"
                 style={{ background: bannerBg, minHeight: '140px' }}
             >
                 {/* Animated background layer */}
@@ -119,8 +119,8 @@ const StudentHome = () => {
 
                 {/* Text — sits above the animation */}
                 <div className="relative z-10">
-                    <h1 className="text-white text-2xl font-bold mb-1">🎓 Student Dashboard</h1>
-                    <p className="text-white/85 text-sm max-w-md leading-relaxed">
+                    <h1 className="text-white text-xl sm:text-2xl font-bold mb-1">🎓 Student Dashboard</h1>
+                    <p className="text-white/85 text-xs sm:text-sm max-w-md leading-relaxed">
                         {stats?.pendingAssignments > 0
                             ? `You have ${stats.pendingAssignments} pending assignments. Keep going!`
                             : 'All caught up! Great work.'}

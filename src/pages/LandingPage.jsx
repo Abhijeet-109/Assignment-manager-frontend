@@ -134,16 +134,16 @@ const LandingPage = () => {
             <div className="min-h-screen flex flex-col font-sans">
 
                 {/* NAVBAR */}
-                <nav className={`fixed top-0 left-0 right-0 z-[999] text-white px-8 py-4 flex justify-between items-center transition-all duration-300 ${scrolled ? 'navbar-solid' : 'navbar-clear'}`}>
-                    <div className="flex items-center gap-2">
-                        <span className="text-2xl">📋</span>
-                        <span className="text-xl font-bold tracking-wide">Assignly</span>
+                <nav className={`fixed top-0 left-0 right-0 z-[999] text-white px-4 md:px-8 py-4 flex justify-between items-center transition-all duration-300 ${scrolled ? 'navbar-solid' : 'navbar-clear'}`}>
+                    <div className="flex items-center gap-1 sm:gap-2">
+                        <span className="text-xl sm:text-2xl flex-shrink-0">📋</span>
+                        <span className="text-lg sm:text-xl font-bold tracking-wide">Assignly</span>
                     </div>
-                    <div className="flex gap-3">
-                        <button onClick={() => navigate('/login')} className="text-white/80 hover:text-white px-4 py-2 text-sm transition">
+                    <div className="flex gap-1 sm:gap-3 items-center">
+                        <button onClick={() => navigate('/login')} className="text-white/80 hover:text-white px-2 sm:px-4 py-2 text-sm transition whitespace-nowrap">
                             Log in
                         </button>
-                        <button onClick={() => navigate('/login')} className="bg-violet-600 hover:bg-violet-700 text-white px-5 py-2 rounded-lg text-sm font-semibold transition">
+                        <button onClick={() => navigate('/login')} className="bg-violet-600 hover:bg-violet-700 text-white px-3 sm:px-5 py-2 rounded-lg text-sm font-semibold transition whitespace-nowrap">
                             Get Started →
                         </button>
                     </div>
@@ -156,32 +156,32 @@ const LandingPage = () => {
                         <span className="inline-block bg-violet-600/20 text-violet-400 text-sm font-semibold px-4 py-1.5 rounded-full mb-6 border border-violet-500/30">
                             📚 Built for Academic Institutions
                         </span>
-                        <h1 className="text-6xl font-extrabold leading-tight mb-6 tracking-tight">
+                        <h1 className="text-4xl md:text-6xl font-extrabold leading-tight mb-6 tracking-tight">
                             The Smarter Way to<br />
                             <span className="text-violet-400">Manage Assignments</span>
                         </h1>
-                        <p className="text-gray-400 text-xl max-w-xl mx-auto mb-10">
+                        <p className="text-gray-400 text-lg md:text-xl max-w-xl mx-auto mb-10">
                             A unified platform for admins, teachers, and students — manage assignments, grade submissions, and track progress all in one place.
                         </p>
-                        <div className="flex justify-center gap-4 flex-wrap">
-                            <button onClick={() => navigate('/login')} className="bg-violet-600 hover:bg-violet-700 text-white font-semibold px-8 py-3.5 rounded-lg transition text-base">
+                        <div className="flex flex-col sm:flex-row justify-center gap-4 flex-wrap">
+                            <button onClick={() => navigate('/login')} className="w-full sm:w-auto bg-violet-600 hover:bg-violet-700 text-white font-semibold px-8 py-3.5 rounded-lg transition text-base">
                                 Get Started Free →
                             </button>
-                            <button onClick={() => navigate('/login')} className="border border-white/20 text-white px-8 py-3.5 rounded-lg hover:bg-white/10 transition text-base">
+                            <button onClick={() => navigate('/login')} className="w-full sm:w-auto border border-white/20 text-white px-8 py-3.5 rounded-lg hover:bg-white/10 transition text-base">
                                 Login to Dashboard
                             </button>
                         </div>
                     </div>
 
                     {/* Dashboard mockup */}
-                    <div className="reveal relative z-10 mt-20 max-w-5xl mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-[0_32px_80px_rgba(0,0,0,0.5)]">
+                    <div className="reveal relative z-10 mt-20 max-w-5xl mx-auto rounded-2xl overflow-hidden border border-white/10 shadow-[0_32px_80px_rgba(0,0,0,0.5)] hidden sm:block">
                         <div className="bg-[#1E293B] px-5 py-3 flex gap-2 items-center border-b border-white/10">
                             <span className="w-3.5 h-3.5 rounded-full bg-red-400" />
                             <span className="w-3.5 h-3.5 rounded-full bg-yellow-400" />
                             <span className="w-3.5 h-3.5 rounded-full bg-green-400" />
                             <span className="ml-4 text-sm text-gray-400">assignly.app/dashboard</span>
                         </div>
-                        <div className="bg-[#1E293B] p-8 grid grid-cols-3 gap-5">
+                        <div className="bg-[#1E293B] p-8 grid grid-cols-1 md:grid-cols-3 gap-5">
                             {[
                                 { label: 'Total Assignments', value: '24', color: 'border-violet-500' },
                                 { label: 'Submissions Today', value: '8', color: 'border-blue-500' },
@@ -192,7 +192,7 @@ const LandingPage = () => {
                                     <div className="text-sm text-gray-400 mt-2">{stat.label}</div>
                                 </div>
                             ))}
-                            <div className="col-span-3 bg-[#0F172A] rounded-xl p-6">
+                            <div className="col-span-1 md:col-span-3 bg-[#0F172A] rounded-xl p-6">
                                 <div className="text-sm text-gray-400 mb-4 font-medium">Recent Assignments</div>
                                 {['Data Structures – Due Tomorrow', 'Web Development – Due in 3 days', 'DBMS Lab Report – Submitted'].map((item, i) => (
                                     <div key={i} className="flex justify-between items-center py-3 border-b border-white/5 last:border-0">

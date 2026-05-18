@@ -38,8 +38,8 @@ const RegisterPage = () => {
     };
 
     return (
-        <div className="min-h-screen bg-[#F3F4F6] dark:bg-[#0F172A] flex items-center justify-center px-4 py-10">
-            <div className="w-full max-w-lg bg-white dark:bg-[#1E293B] rounded-2xl shadow-xl p-8 border border-gray-200 dark:border-violet-900/30">
+        <div className="min-h-screen bg-[#F3F4F6] dark:bg-[#0F172A] flex items-center justify-center px-4 py-6 sm:py-10">
+            <div className="w-full max-w-lg bg-white dark:bg-[#1E293B] rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-200 dark:border-violet-900/30">
 
                 {/* Header */}
                 <div className="text-center mb-6">
@@ -59,7 +59,7 @@ const RegisterPage = () => {
                 <form onSubmit={handleSubmit} className="space-y-4">
 
                     {/* First + Last Name */}
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label className={lbl}>First Name</label>
                             <input type="text" name="firstName" value={form.firstName}
@@ -94,7 +94,7 @@ const RegisterPage = () => {
                     </div>
 
                     {/* Department + Semester */}
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label className={lbl}>Department</label>
                             <select name="department" value={form.department}

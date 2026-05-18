@@ -62,7 +62,7 @@ const TeacherHome = () => {
             </div>
 
             {/* Division Filter */}
-            <div className="rounded-xl p-4 border flex items-center gap-4"
+            <div className="rounded-xl p-4 border flex flex-wrap items-center gap-4"
                 style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border)' }}>
                 <span className="text-sm font-bold uppercase tracking-wide" style={{ color: 'var(--text-muted)' }}>
                     Division:
@@ -117,43 +117,45 @@ const TeacherHome = () => {
                                     </h2>
                                     <a href="/teacher/assignments" className="text-blue-300 text-xs hover:underline">View All</a>
                                 </div>
-                                <table className="w-full text-sm">
-                                    <thead>
-                                        <tr className="text-left border-b" style={{ color: 'var(--text-muted)', borderColor: 'var(--border)' }}>
-                                            <th className="px-4 py-2">Title</th>
-                                            <th className="px-4 py-2">Due</th>
-                                            <th className="px-4 py-2">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {assignments.slice(0, 5).map(a => {
-                                            const overdue = new Date(a.dueDate) < new Date();
-                                            return (
-                                                <tr key={a._id} className="border-b"
-                                                    style={{ borderColor: 'var(--border)', color: 'var(--text-primary)' }}
-                                                    onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
-                                                    onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
-                                                    <td className="px-4 py-3 font-medium">{a.title}</td>
-                                                    <td className="px-4 py-3 text-xs" style={{ color: 'var(--text-muted)' }}>
-                                                        {formatDate(a.dueDate)}
-                                                    </td>
-                                                    <td className="px-4 py-3">
-                                                        <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${overdue ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
-                                                            {overdue ? 'Overdue' : 'Active'}
-                                                        </span>
+                                <div className="overflow-x-auto">
+                                    <table className="w-full text-sm">
+                                        <thead>
+                                            <tr className="text-left border-b" style={{ color: 'var(--text-muted)', borderColor: 'var(--border)' }}>
+                                                <th className="px-4 py-2 whitespace-nowrap">Title</th>
+                                                <th className="px-4 py-2 whitespace-nowrap">Due</th>
+                                                <th className="px-4 py-2 whitespace-nowrap">Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {assignments.slice(0, 5).map(a => {
+                                                const overdue = new Date(a.dueDate) < new Date();
+                                                return (
+                                                    <tr key={a._id} className="border-b"
+                                                        style={{ borderColor: 'var(--border)', color: 'var(--text-primary)' }}
+                                                        onMouseEnter={e => e.currentTarget.style.backgroundColor = 'var(--hover-row)'}
+                                                        onMouseLeave={e => e.currentTarget.style.backgroundColor = 'transparent'}>
+                                                        <td className="px-4 py-3 font-medium whitespace-nowrap">{a.title}</td>
+                                                        <td className="px-4 py-3 text-xs whitespace-nowrap" style={{ color: 'var(--text-muted)' }}>
+                                                            {formatDate(a.dueDate)}
+                                                        </td>
+                                                        <td className="px-4 py-3 whitespace-nowrap">
+                                                            <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${overdue ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'}`}>
+                                                                {overdue ? 'Overdue' : 'Active'}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                );
+                                            })}
+                                            {!assignments.length && (
+                                                <tr>
+                                                    <td colSpan={3} className="px-4 py-6 text-center text-sm" style={{ color: 'var(--text-muted)' }}>
+                                                        No assignments {divFilter ? `for Div ${divFilter}` : 'yet'}.
                                                     </td>
                                                 </tr>
-                                            );
-                                        })}
-                                        {!assignments.length && (
-                                            <tr>
-                                                <td colSpan={3} className="px-4 py-6 text-center text-sm" style={{ color: 'var(--text-muted)' }}>
-                                                    No assignments {divFilter ? `for Div ${divFilter}` : 'yet'}.
-                                                </td>
-                                            </tr>
-                                        )}
-                                    </tbody>
-                                </table>
+                                            )}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
 
                             {/* Submission Progress */}

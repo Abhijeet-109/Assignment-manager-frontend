@@ -14,7 +14,7 @@ const StudentDashboard = () => {
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     return (
-        <div className="flex h-screen overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
+        <div className="flex flex-col md:flex-row h-screen overflow-hidden" style={{ backgroundColor: 'var(--bg-page)' }}>
             <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
             <div className="flex-1 flex flex-col min-w-0">
                 <Navbar onMenuClick={() => setSidebarOpen(true)} />

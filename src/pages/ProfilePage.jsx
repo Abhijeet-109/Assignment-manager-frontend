@@ -222,7 +222,7 @@ const ProfilePage = () => {
             : null;
 
     return (
-        <div className="p-8 max-w-2xl mx-auto space-y-6">
+        <div className="p-4 sm:p-8 max-w-2xl mx-auto space-y-6">
             <h1 className="text-2xl font-bold" style={{ color: 'var(--text-heading)' }}>My Profile</h1>
 
             {/* Alert */}
@@ -238,7 +238,7 @@ const ProfilePage = () => {
             )}
 
             {/* Avatar + Info Card */}
-            <div className="rounded-xl p-6 border flex items-center gap-5"
+            <div className="rounded-xl p-6 border flex flex-col sm:flex-row items-center sm:items-center gap-5 text-center sm:text-left"
                 style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border)' }}>
 
                 {/* Avatar with WhatsApp-style menu */}
@@ -327,7 +327,7 @@ const ProfilePage = () => {
             <div className="rounded-xl p-6 border space-y-4"
                 style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border)' }}>
                 <h2 className="font-semibold text-base" style={{ color: 'var(--text-heading)' }}>Edit Name</h2>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                         <label className="text-sm mb-1 block" style={{ color: 'var(--text-muted)' }}>First Name</label>
                         <input
@@ -388,7 +388,7 @@ const ProfilePage = () => {
                 style={{ backgroundColor: 'var(--bg-card)', borderColor: 'var(--border)' }}>
                 <h2 className="font-semibold text-base" style={{ color: 'var(--text-heading)' }}>Appearance</h2>
                 <p className="text-sm" style={{ color: 'var(--text-muted)' }}>Choose your preferred theme</p>
-                <div className="flex gap-3">
+                <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
                     {[
                         { value: THEMES.LIGHT, label: '☀️ Light' },
                         { value: THEMES.DARK, label: '🌙 Dark' },
